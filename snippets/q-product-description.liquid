@@ -1,0 +1,74 @@
+<style>
+  .show-more-style {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .show-more-style:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0) 55%, white);
+  }
+
+  .show-more-info {
+    display: block;
+    margin-top: 10px;
+    overflow: hidden;
+    max-height: 100px;
+    transition: max-height 0.3s;
+  }
+
+  .q-more-button {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    font-weight: 400;
+    font-size: 16px;
+    color: #00a7e1;
+    text-decoration: none;
+    padding-top: 14px;
+  }
+
+  .q-more-button-arrow {
+    height: 16px;
+    width: 16px;
+    transform: rotate(0deg);
+    fill: #00a7e1;
+  }
+
+  .q-more-button-arrow-active {
+    transform: rotate(180deg);
+  }
+</style>
+
+<div>
+  <div class="product-form__text show-more-info show-more-style" style="max-height: 100px;">
+    {{- block.settings.text -}}
+  </div>
+
+  <button onclick="toggleContent()" class="q-more-button link">
+    Learn More
+    <svg class="q-more-button-arrow" viewBox="0 0 1024 1024">
+      <path d="M225.408 368.384L496 640.641l270.592-272.257-48.64-49.024L496 542.592 274.176 319.36l-48.768 49.024z" fill=""></path>
+    </svg>
+  </button>
+</div>
+
+<script>
+  function toggleContent() {
+    var contentContainer = document.querySelector('.show-more-info');
+    var arrow = document.querySelector('.q-more-button-arrow');
+    var isExpanded = contentContainer.style.maxHeight != '100px';
+
+    contentContainer.style.maxHeight = isExpanded ? '100px' : contentContainer.scrollHeight + 'px';
+    arrow.classList.toggle('q-more-button-arrow-active', !isExpanded);
+    contentContainer.classList.toggle('show-more-style', isExpanded);
+  }
+</script>

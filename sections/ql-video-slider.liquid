@@ -1,0 +1,448 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_md }}px;
+    padding-bottom: {{ section.settings.padding_bottom_md }}px;
+    background: {{ section.settings.bg_color_md }}
+  }
+  @media (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .qvs-title {
+    font-size: 48px;
+    margin-top: 0;
+    margin-bottom: 48px;
+    font-weight: 700;
+  }
+  .qvs-swiper {
+    padding: 15px 15px;
+  }
+  .qvs-swiper-slide {
+    width:400px;
+    position: relative;
+    transition: 0.4s;
+    cursor: pointer;
+  }
+  .qvs-slider-a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #333333;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .qvs-video-wrap {
+    padding-top: 150%;
+    position: relative;
+    transition: .4s;
+    box-sizing: border-box;
+    background: #7c7c7c;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .qvs-video-wrap:hover {
+    transform: scale(1.01);
+  }
+  .full-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    object-fit: cover;
+  }
+  .qvs-item-main {
+    font-size: 18px;
+    margin: 20px 0 0;
+    color: #333;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 61px;
+    transition: .6s;
+    line-height: 1.3;
+  }
+  .qvs-next,.qvs-prev {
+    width: 56px;
+    height: 56px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    top: 43%;
+  }
+  .qvs-next.swiper-button-disabled,.qvs-prev.swiper-button-disabled {
+    display: none !important;
+  }
+  .qvs-next::after,.qvs-prev::after {
+    color: #333;
+    font-size: 21px;
+    font-weight: bold;
+  }
+  .qvs-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    object-fit: cover;
+  }
+  .zIndex2 {
+    z-index: 2;
+  }
+  .qvs-play-icon {
+    width: 35px;
+    height: 35px;
+    background: rgba(255,255,255,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    z-index: 3;
+    border-radius: 50%;
+    transition: .3s;
+  }
+  .qvs-play-icon>svg {
+    width: 14px;
+    height: 15px;
+  }
+  .qvs-mask {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top:0;
+    display: none;
+  }
+  .qvs-mask[show='1'] {
+    display: flex !important;
+    animation: popshow .4s;
+  }
+  @keyframes popshow {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .qvs-big-video-wrap {
+    width: 60%;
+    position: relative;
+  }
+  .qvs-mask-close {
+    position: absolute;
+    left: 98%;
+    bottom: 100%;
+    cursor: pointer;
+  }
+  .qvs-big-video {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .qvs-full-box {
+    width: 100%;
+    display: none;
+  }
+  .qvs-full-box[show='1'] {
+    display: block;
+  }
+  .qvs-video-rela {
+    padding-top: 60%;
+    position: relative;
+  }
+  .qvs-swiper[center='1'] {
+    padding: 0 !important
+  }
+  .qvs-swiper[center='1'] .swiper-wrapper {
+    justify-content: center;
+  }
+  .qvs-full-main {
+    background: #FFF;
+    color: #1f1f1f;
+    font-size: 18px;
+    padding: 20px;
+    border-radius: 0 0 5px 5px;
+  }
+  @media screen and (max-width: 750px) {
+    .qvs-title {
+      font-size: 20px;
+      margin-bottom: 47px;
+    }
+    .qvs-swiper {
+      padding-left: 20px;
+    }
+    .qvs-swiper-slide {
+      width: 240px;
+    }
+    .qvs-play-icon {
+      width: 36px;
+      height: 36px;
+    }
+    .qvs-play-icon>svg {
+      width: 20px;
+      height: 20px;
+    }
+    .qvs-video-rela {
+      padding-top: 100%;
+    }
+    .qvs-item-main {
+      font-size: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 30;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: auto;
+    }
+    .qvs-next,.qvs-prev {
+      width: 56px;
+      height: 56px;
+      transform: scale(.7);
+    }
+    .qvs-big-video-wrap {
+      width: 80vw;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <q-video-slider section-id="{{ section.id }}">
+    <div class="qvs-container">
+      {% if section.settings.title %}
+        <div class="page-width">
+          <h2 class="qvs-title">{{section.settings.title}}</h2>
+        </div>
+      {% endif %}
+      <div class="swiper qvs-swiper swiper-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide qvs-swiper-slide">
+              <div class="qvs-slider-a" data-url="{{ block.settings.video.sources[0].url }}">
+                <div class="qvs-video-wrap">
+                  <div class="qvs-play-icon">
+                    <svg t="1732621354348" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3338" width="200" height="200"><path d="M817.088 484.96l-512-323.744C295.232 154.976 282.752 154.592 272.576 160.224 262.336 165.856 256 176.608 256 188.256l0 647.328c0 11.648 6.336 22.4 16.576 28.032 4.8 2.656 10.112 3.968 15.424 3.968 5.952 0 11.904-1.664 17.088-4.928l512-323.616C826.368 533.184 832 522.976 832 512 832 501.024 826.368 490.816 817.088 484.96z" fill="#ffffff" p-id="3339"></path></svg>
+                  </div>
+                  {% assign img = block.settings.image %}
+                  {% if img != blank %}
+                    {{ 
+                      img
+                      | image_url: width:500
+                      | image_tag: 
+                        loading: 'lazy',
+                        alt: img.alt,
+                        class: 'full-img zIndex2'
+                    }}
+                  {% endif %}
+                </div>
+                <div class="qvs-item-main">{{block.settings.content}}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="swiper-button-next qvs-next"></div>
+        <div class="swiper-button-prev qvs-prev"></div>
+      </div>
+    </div>
+    <div class="qvs-mask">
+      <div class="qvs-big-video-wrap">
+        <svg class="qvs-mask-close" t="1732784997582" class="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2296" width="48" height="48"><path d="M843.904 783.573333 783.573333 843.904 512.042667 572.373333 240.512 843.904 180.181333 783.573333 451.712 512.042667 180.181333 240.512 240.512 180.181333 512.042667 451.712 783.573333 180.181333 843.904 240.512 572.373333 512.042667 843.904 783.573333Z" p-id="2297" fill="#ffffff"></path></svg>
+        {% for block in section.blocks %}
+          <div class="qvs-full-box">
+            <div class="qvs-video-rela">
+              {% assign video = block.settings.video %}
+              {% if video != blank %}
+                {{
+                  video
+                  | video_tag:
+                    image_size: '',
+                    autoplay: false,
+                    loop: true,
+                    muted: false,
+                    controls: true,
+                    class: "qvs-big-video"
+                  }}
+              {% endif %}
+            </div>
+            <div class="qvs-full-main">{{ block.settings.content }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </q-video-slider>
+</section>
+
+{% javascript %}
+class VideoSlider extends HTMLElement {
+  constructor() {
+    super();
+    this.init()
+  }
+  init () {
+    let sectionId = this.getAttribute("section-id")
+    let className = `.swiper-${sectionId}`
+    const swiper = new Swiper(className, {
+      loop: false,
+      slidesPerView: 'auto',
+      navigation: {
+        nextEl: '.qvs-next',
+        prevEl: '.qvs-prev',
+      }
+    });
+
+    let sliders = this.querySelectorAll('.swiper-slide');
+    let oSwiper = this.querySelector('.qvs-swiper');   
+    let oItems = this.querySelectorAll('.qvs-slider-a');
+    let oVideos = this.querySelectorAll('.qvs-big-video');
+    let oMask = this.querySelector('.qvs-mask');
+    let oFull = this.querySelectorAll('.qvs-full-box');
+    let oClose = this.querySelector('.qvs-mask-close');
+    let index = 0
+    oItems.forEach((item, i) => {
+      item.addEventListener("click", () => {
+        let url = item.getAttribute("data-url");
+        if (url) {
+          index = i
+          oMask.setAttribute("show", "1")
+          oFull.forEach(v => {
+            v.setAttribute("show", "")
+          })
+          oFull[i].setAttribute("show", "1")
+          console.log(oFull[i])
+          oVideos[i].play()
+        }
+      })
+    })
+    oClose.addEventListener("click", () => {
+      oMask.setAttribute("show", "")
+      oVideos[index].pause()
+    })
+  }
+}
+if (!customElements.get('q-video-slider')) {
+  customElements.define('q-video-slider', VideoSlider);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Video Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_top_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Preview Image"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Slider"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,284 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background: {{ section.settings.bg_color }}
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .full-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    object-fit: cover;
+  }
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  .section-{{ section.id }} .isb-wrap {
+    position: relative;
+    height: {{ section.settings.banner_height }}px;
+    background: {{ section.settings.banner_bg_color }};
+    overflow: hidden;
+  }
+  {%- assign direction = section.settings.direction -%}
+  .section-{{ section.id }} .isb-content {
+    position: absolute;
+    {{ direction }}: 0;
+    top: 0;
+    width: auto;
+    height: 100%;
+    text-wrap: nowrap;
+    animation: lisbloop{{section.id}} linear infinite;
+    animation-duration: 1s;
+  }
+  @keyframes lisbloop{{section.id}} {
+    from {
+      {{ direction }}: 0;
+    }
+    to {
+      {{ direction }}: var(--w);
+    }
+  }
+  .isb-content:hover {
+    animation-play-state: paused;
+  }
+  .lsb-nowrap {
+    display: inline-block;
+    height: 100%;
+    font-size: 0;
+  }
+  .section-{{ section.id }} .isb-items {
+    display: inline-block;
+    height: 100%;
+    font-size: {{ section.settings.font_size }}px;
+    color: {{ section.settings.text_color }};
+    padding: 0 20px;
+  }
+  .isb-main {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .isb-img-wrap {
+    height: 100%;
+  }
+  .isb-img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+  }
+  @media screen and (max-width: 750px) {
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .isb-wrap {
+      height: {{ section.settings.banner_height | times:0.75 | round: 0 }}px !important;
+    }
+    .isb-items {
+      font-size: {{ section.settings.font_size | times: 0.75 | round: 0 }}px !important;
+      padding: 0 10px;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <infinite-scrolling-banner speed="{{ section.settings.speed }}">
+    <div class="isb-wrap">
+      <div class="isb-content">
+        {% for i in (0..1) %}
+          <div class="lsb-nowrap">
+            {% for block in section.blocks %}
+              <div class="isb-items {% if i == 0 %} isb-f-items {% endif %}">
+                {% assign desktop_image = block.settings.desktop_image %}
+                {% if desktop_image != blank %}
+                  <div class="isb-img-wrap">
+                      {{ 
+                        desktop_image
+                        | image_url: width: desktop_image.width
+                        | image_tag: 
+                          loading: 'lazy',
+                          draggable: false,
+                          preload: false,
+                          alt: desktop_image.alt,
+                          class: 'isb-img'
+                      }}
+                  </div>
+                {% else %}
+                  <div class="isb-main">{{ block.settings.content }}</div>
+                {% endif %}
+
+              </div>
+            {% endfor %} 
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </infinite-scrolling-banner>
+</section>
+
+{% javascript %}
+class InfiniteScrollingBanner extends HTMLElement {
+  constructor() {
+    super();
+    this.init()
+  }
+  init () {
+    let list = this.querySelectorAll('.isb-f-items')
+    let oContent = this.querySelector('.isb-content')
+    let oWrap = this.querySelector('.isb-wrap')
+    let speed = this.getAttribute("speed") * 1
+
+    if (list) {
+      let rate = oContent.offsetWidth / oWrap.offsetWidth
+      rate = speed * (1 + rate)
+      rate = Math.ceil(rate)
+      let w = 0
+      list.forEach(item => {
+        w += item.offsetWidth + 2
+      })
+      setTimeout(() => {
+        oContent.setAttribute('style', `--w:-${w}px;animation-duration: ${rate}s`)
+      }, 500)
+    }
+  }
+}
+if (!customElements.get('infinite-scrolling-banner')) {
+  customElements.define('infinite-scrolling-banner', InfiniteScrollingBanner);
+}
+{% endjavascript %}
+
+{% schema %}
+ {
+  "name": "Infinite Scrolling Banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction",
+      "options": [
+        {
+          "label":"To Left",
+          "value": "left"
+        },
+        {
+          "label":"To Right",
+          "value": "right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "unit": "s",
+      "label": "Speed",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "banner_height",
+      "min": 30,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "label": "Banner Height",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "banner_bg_color",
+      "label": "Banner Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type":"textarea",
+          "id": "content",
+          "label": "content"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop Image",
+          "info": "size:628*650"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Infinite Scrolling Banner"
+    }
+  ]
+ }
+{% endschema %}

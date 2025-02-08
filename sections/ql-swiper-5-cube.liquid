@@ -1,0 +1,250 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background: {{ section.settings.bg_color }}
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .lsp5-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .lsp5-swiper {
+    width: 500px;
+    height: 500px;
+    margin: auto;
+  }
+  .lsp5-swiper-slide {
+    position: relative;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .lsp5-slider-a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #333333;
+    text-decoration: none;
+  }
+  .lsp5-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .lsp5-item-main {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    padding: 20px;
+    left: 0;
+    bottom: 0;
+    color: var(--text_color);
+    box-sizing: border-box;
+  }
+  .lsp5-item-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 10px 0 0;
+    color: inherit;
+  }
+  .lsp5-item-content {
+    font-size: 16px;
+    color: inherit;
+  }
+  .lsp1-btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+    width: 500px;
+    margin: 20px auto;
+  }
+  .lsp5-next,.lsp5-prev {
+    width: 56px;
+    height: 56px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: rgba(213, 213, 213, 0.6);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  .lsp5-next::after,.lsp5-prev::after {
+    color: #333;
+    font-size: 21px;
+    font-weight: bold;
+  }
+  .lsp5-prev {
+    transform: rotate(180deg);
+  }
+  .lsp5-prev.swiper-button-disabled,.lsp5-next.swiper-button-disabled {
+    opacity: 0.5;
+    cursor: auto;
+  }
+  @media screen and (max-width: 1024px) {
+    .lsp5-title {
+      font-size: 20px;
+    }
+    .lsp5-swiper {
+      width: 100%;
+      height: 100vw;
+    }
+    .lsp1-btn-wrap {
+      width: 100%;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <q-swiper-5-cube>
+    <div class="lsp5-container">
+      {% if section.settings.title %}
+        <h2 class="lsp5-title">{{section.settings.title}}</h2>
+      {% endif %}
+      <div class="swiper lsp5-swiper">
+        <div class="swiper-wrapper">
+          {% assign products = section.settings.collection.products %}
+          {% for block in section.blocks %}
+            <div class="swiper-slide lsp5-swiper-slide">
+              <a class="lsp5-slider-a" href="{{ block.settings.url }}">
+                {% assign img = block.settings.desktop_image %}
+                {% if img != blank %}
+                  {{ 
+                    img
+                    | image_url: width:img.width
+                    | image_tag: 
+                      loading: 'lazy',
+                      alt: img.alt,
+                      sizes: "100vw", 
+                      widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                      class: 'lsp5-img'
+                  }}
+                {% endif %}
+                <div class="lsp5-item-main" style="--text_color: {{ block.settings.text_color }}">
+                  {% if block.settings.title %}
+                    <h2 class="lsp5-item-title">{{block.settings.title}}</h2>
+                  {% endif %}
+                  {% if block.settings.content %}
+                    <p class="lsp5-item-content">{{block.settings.content}}</p>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+        
+      </div>
+      <div class="lsp1-btn-wrap">
+        <div class="lsp5-prev">
+          <svg t="1731394647994" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3119" width="20" height="20"><path d="M348.311309 20.039939 210.069059 157.208186l359.489206 356.587089L210.069059 870.401824l138.24225 137.20717 497.809301-493.812503L348.311309 20.039939z" fill="#272635" p-id="3120"></path></svg>
+        </div>
+        <div class="lsp5-next">
+          <svg t="1731394647994" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3119" width="20" height="20"><path d="M348.311309 20.039939 210.069059 157.208186l359.489206 356.587089L210.069059 870.401824l138.24225 137.20717 497.809301-493.812503L348.311309 20.039939z" fill="#272635" p-id="3120"></path></svg>
+        </div>
+      </div>
+    </div>
+  </q-swiper-5-cube>
+</section>
+
+{% schema %}
+{
+  "name": "Swiper-5-cube",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Card",
+      "settings": [
+        {
+          "type":"textarea",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type":"textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type":"color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#333333"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Image",
+          "info": "size:592*355"
+        },
+        {
+          "type":"url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Swiper-5-cube"
+    }
+  ]
+}
+{% endschema %}

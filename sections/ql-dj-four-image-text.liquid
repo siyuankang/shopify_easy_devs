@@ -1,0 +1,296 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background: {{ section.settings.bg_color }}
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .qdfi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    padding: 20px;
+  }
+  .qdfi-item {
+    position: relative;
+  }
+  .qdfi-img-wrap {
+    position: relative;
+    padding-top: 80%;
+  }
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  .qdfi-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .qdfi-item-main {
+    position: absolute;
+    left: 50%;
+    top:10%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 2;
+  }
+  .qdfi-item-title {
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: inherit;
+  }
+  .qdfi-item-title-2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: inherit;
+  }
+  .qdfi-item-title-3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: inherit;
+  }
+  .qdfi-btn-wrap {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qdfi-btn-wrap > a {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    margin: 0px 5px;
+    transition: .3s;
+  }
+  .qdfi-btn-wrap > a:hover {
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 1024px) {
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .qdfi-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 10px;
+      padding: 10px;
+    }
+    .qdfi-item-main {
+      width: 95%;
+    }
+    .qdfi-item-title {
+      font-size: 13px;
+      margin: 0;
+      margin-bottom: 5px;
+    }
+    .qdfi-item-title-2 {
+      font-size: 20px;
+      margin: 0;
+      margin-bottom: 5px;
+    }
+    .qdfi-item-title-3 {
+      font-size: 16px;
+      margin: 0px;
+      margin-bottom: 5px;
+    }
+    .qdfi-btn-wrap {
+      margin-top: 5px;
+    }
+    .qdfi-img-wrap {
+      padding-top: 100%;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <div class="qdfi-grid">
+    {% for block in section.blocks %}
+      <div class="qdfi-item">
+        <div class="qdfi-img-wrap">
+          {% assign img = block.settings.desktop_image %}
+          {% assign mobile_image = block.settings.mobile_image %}
+          {% if img != blank %}
+            {{ 
+              img
+              | image_url: width:img.width
+              | image_tag: 
+                loading: 'lazy',
+                alt: img.alt,
+                sizes: "100vw", 
+                widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                class: 'qdfi-img pc-show'
+            }}
+          {% endif %}
+          {% if mobile_image != blank %}
+            {{ 
+              mobile_image
+              | image_url: width:mobile_image.width
+              | image_tag: 
+                loading: 'lazy',
+                alt: mobile_image.alt,
+                sizes: "100vw", 
+                widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                class: 'qdfi-img mobile-show'
+            }}
+          {% endif %}
+        </div>
+        <div class="qdfi-item-main" style="color:{{ block.settings.text_color }}">
+          {% if block.settings.title_1 != blank %}
+            <h2 class="qdfi-item-title">{{block.settings.title_1}}</h2>
+          {% endif %}
+          {% if block.settings.title_2 != blank %}
+            <h2 class="qdfi-item-title-2">{{block.settings.title_2}}</h2>
+          {% endif %}
+          {% if block.settings.title_3 != blank %}
+            <h2 class="qdfi-item-title-3">{{block.settings.title_3}}</h2>
+          {% endif %}
+          <div class="qdfi-btn-wrap">
+            {% if block.settings.url_1 != blank %}
+              <a href="{{ block.settings.url_1 }}" style="border-color:{{ block.settings.text_color }}">
+                {{ block.settings.btn_1_text }}
+                <svg t="1732000833194" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2285" width="18" height="18"><path d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z" fill="{{ block.settings.text_color }}" p-id="2286"></path></svg>
+              </a>
+            {% endif %}
+            {% if block.settings.url_2 != blank %}
+              <a href="{{ block.settings.url_2 }}" style="border-color:{{ block.settings.text_color }}">
+                {{ block.settings.btn_2_text }}
+                <svg t="1732000833194" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2285" width="18" height="18"><path d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z" fill="{{ block.settings.text_color }}" p-id="2286"></path></svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Four Image With Text",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+      {
+        "type": "slider",
+        "name": "Card",
+        "settings": [
+          {
+            "type":"textarea",
+            "id": "title_1",
+            "label": "Title-1"
+          },
+          {
+            "type":"textarea",
+            "id": "title_2",
+            "label": "Title-2"
+          },
+          {
+            "type":"textarea",
+            "id": "title_3",
+            "label": "Title-3"
+          },
+          {
+            "type":"color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "image_picker",
+            "id": "desktop_image",
+            "label": "Desktop Image",
+            "info": "size:1280*800"
+          },
+          {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile Image",
+            "info": "size:375*375"
+          },
+          {
+            "type": "url",
+            "id": "url_1",
+            "label": "Button 1 link"
+          },
+          {
+            "type":"text",
+            "id": "btn_1_text",
+            "label": "Button 1 text",
+            "default": "了解更多"
+          },
+          {
+            "type":"url",
+            "id": "url_2",
+            "label": "Button 2 link"
+          },
+          {
+            "type":"text",
+            "id": "btn_2_text",
+            "label": "Button 2 text",
+            "default": "立即购买"
+          }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Four Image With Text"
+    }
+  ]
+}
+{% endschema %}

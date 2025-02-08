@@ -1,0 +1,513 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.70 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.70 | round: 0 }}px;
+    background: {{ section.settings.bg_color }}
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .qcpp-slider-a .vtl-pr-review-stars-snippet-container {
+    display: none !important;
+  }
+  .qcpp-title {
+    font-size: 48px;
+    margin-top: 0;
+    margin-bottom: 68px;
+    font-weight: bold;
+    color: #1f1f1f;
+    text-align: center;
+  }
+  .qcpp-swiper {
+    max-width: 1160px;
+    margin: auto;
+    text-align: center;
+  }
+  .qcpp-swiper-slide {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .qcpp-slider-a {
+    position: relative;
+    display: block;
+    width: 100%;
+    color: #1f1f1f;
+    padding-bottom: 30px;
+    max-width: 240px;
+    margin: auto;
+  }
+  .qcpp-prod-img-wrap {
+    width: 210px;
+    margin: auto;
+    /* overflow: hidden; */
+  }
+  .qcpp-prod-img-pad {
+    padding-top: 85.7%;
+    position: relative;
+    transition: .4s;
+    margin-bottom: 10px;
+  }
+  .qcpp-prod-img-pad:hover {
+    transform: scale(1.05);
+  }
+  .full-contain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    object-fit: contain;
+  }
+  .qcpp-pro-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: inherit;
+  }
+  .qcpp-pro-desc {
+    font-size: 16px;
+    margin: 9px 0 20px;
+    height: 44px;
+    color: inherit;
+    line-height: 1.3;
+    
+  }
+  .qcpp-btn {
+    width:120px;
+    text-decoration: none;
+    transition: 0.2s;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-weight: 500;
+    max-width: 130px;
+    display: block;
+  }
+  .qcpp-btn:hover {
+    opacity: 0.8;
+  }
+  .section-{{ section.id }} .qcpp-prod-btns-1 {
+    font-size: 18px;
+    border-radius: 23px;
+    display: block;
+    background: {{ section.settings.btn_bg_color }};
+    color: {{ section.settings.btn_text_color }} !important;
+    margin: 0 auto 50px;
+  }
+  .qcpp-pro-meta-images {
+    width: 51px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    margin: 18px auto 0;
+  }
+  .qcpp-pro-meta-text {
+    font-size: 14px;
+    margin: 20px 0 20px;
+    height: 40px;
+    line-height: 1.3;
+  }
+  .qcpp-more {
+    color: #0084C2 !important;
+    text-decoration: none;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+  }
+  .qcpp-more>svg {
+    width: 15px;
+    height: 15px;
+  }
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  .qcpp-bar {
+    opacity: 1 !important;
+    width: 50% !important;
+    left: 25% !important;
+  }
+  .qcpp-bar .swiper-scrollbar-drag {
+    background: linear-gradient( 80deg, #0036B3 0%, #07CFD1 100%);
+  }
+  @media screen and (max-width: 1024px) {
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .qcpp-title {
+      font-size: 20px;
+      margin-bottom: 33px;
+    }
+    .qcpp-prod-img-wrap {
+      width: 80%;
+    }
+    .qcpp-pro-title {
+      font-size: 13px;
+      margin-top: 12px;
+    }
+    .qcpp-pro-desc {
+      font-size: 13px;
+      height: 30px;
+    }
+    .qcpp-prod-btns-1 {
+      font-size: 16px;
+      width: 100px;
+      margin: 0 auto 30px;
+    }
+    .qcpp-pro-meta-images {
+      width: 37px;
+      height: 34px;
+      margin-top: 0px auto px;
+    }
+    .qcpp-pro-meta-text {
+      font-size: 13px;
+      margin: 8px 0 8px;
+      height: 35px;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <ql-product-comparison section-id="{{ section.id }}">   
+    <div class="t4s-container">
+      {% if section.settings.title %}
+        <h2 class="qcpp-title">{{section.settings.title}}</h2>
+      {% endif %}
+      <div class="swiper qcpp-swiper swiper-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            {% assign product = block.settings.product1 %}
+            {% if product != blank %}
+              {% assign parameter_comparison_product_image = product.metafields.custom.parameter_comparison_product_image %}
+              {% assign parameter_comparison_name = product.metafields.custom.parameter_comparison_name %}
+              {% assign parameter_comparison_description = product.metafields.custom.parameter_comparison_description %}
+              {% assign parameter_comparison_image1 = product.metafields.custom.parameter_comparison_image1 %}
+              {% assign parameter_comparison_text1 = product.metafields.custom.parameter_comparison_text1 %}
+              {% assign parameter_comparison_image2 = product.metafields.custom.parameter_comparison_image2 %}
+              {% assign parameter_comparison_text2 = product.metafields.custom.parameter_comparison_text2 %}
+              {% assign parameter_comparison_image3 = product.metafields.custom.parameter_comparison_image3 %}
+              {% assign parameter_comparison_text3 = product.metafields.custom.parameter_comparison_text3 %}
+              {% assign parameter_comparison_image4 = product.metafields.custom.parameter_comparison_image4 %}
+              {% assign parameter_comparison_text4 = product.metafields.custom.parameter_comparison_text4 %}
+              {% if parameter_comparison_product_image == blank %}
+                {% assign parameter_comparison_product_image = block.settings.product_img %}
+              {% endif %}
+              {% if parameter_comparison_product_image == blank %}
+                {% assign parameter_comparison_product_image = product.images[0] %}
+              {% endif %}
+              {% if parameter_comparison_name == blank %}
+                {% assign parameter_comparison_name = block.settings.parameter_comparison_name %}
+              {% endif %}
+              {% if parameter_comparison_description == blank %}
+                {% assign parameter_comparison_description = block.settings.parameter_comparison_description %}
+              {% endif %}
+              {% if parameter_comparison_image1 == blank %}
+                {% assign parameter_comparison_image1 = block.settings.parameter_comparison_image1 %}
+              {% endif %}
+              {% if parameter_comparison_text1 == blank %}
+                {% assign parameter_comparison_text1 = block.settings.parameter_comparison_text1 %}
+              {% endif %}
+              {% if parameter_comparison_image2 == blank %}
+                {% assign parameter_comparison_image2 = block.settings.parameter_comparison_image2 %}
+              {% endif %}
+              {% if parameter_comparison_text2 == blank %}
+                {% assign parameter_comparison_text2 = block.settings.parameter_comparison_text2 %}
+              {% endif %}
+              {% if parameter_comparison_image3 == blank %}
+                {% assign parameter_comparison_image3 = block.settings.parameter_comparison_image3 %}
+              {% endif %}
+              {% if parameter_comparison_text3 == blank %}
+                {% assign parameter_comparison_text3 = block.settings.parameter_comparison_text3 %}
+              {% endif %}
+              {% if parameter_comparison_image4 == blank %}
+                {% assign parameter_comparison_image4 = block.settings.parameter_comparison_image4 %}
+              {% endif %}
+              {% if parameter_comparison_text4 == blank %}
+                {% assign parameter_comparison_text4 = block.settings.parameter_comparison_text4 %}
+              {% endif %}
+              
+              <div class="swiper-slide qcpp-swiper-slide">
+                <div class="qcpp-slider-a">
+                  <div class="qcpp-prod-img-wrap">
+                    <div class="qcpp-prod-img-pad">
+                      {% if parameter_comparison_product_image != blank %}
+                        {{ 
+                          parameter_comparison_product_image
+                          | image_url: width:parameter_comparison_product_image.width
+                          | image_tag: 
+                            loading: 'lazy',
+                            alt: parameter_comparison_product_image.alt,
+                            sizes: "400px", 
+                            widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                            class: 'full-contain'
+                        }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% if parameter_comparison_name != blank %}
+                    <h3 class="qcpp-pro-title">{{ parameter_comparison_name }}</h3>
+                  {% endif %}
+                  {% if parameter_comparison_description != blank %}
+                    <p class="qcpp-pro-desc">{{ parameter_comparison_description }}</p>
+                  {% endif %}
+                  <a class="qcpp-prod-btns-1 qcpp-btn" 
+                    href="/cart/{{ product.variants.first.id }}:1">Buy</a>
+                    
+                    {% if parameter_comparison_image1 != blank %}
+                      {{ 
+                        parameter_comparison_image1
+                        | image_url: width:parameter_comparison_image1.width
+                        | image_tag: 
+                          loading: 'lazy',
+                          alt: parameter_comparison_image1.alt,
+                          sizes: "400px", 
+                          widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                          class: 'qcpp-pro-meta-images'
+                      }}
+                    {% endif %}
+                    {% if parameter_comparison_text1 != blank %}
+                      <p class="qcpp-pro-meta-text">{{ parameter_comparison_text1 }}</p>
+                    {% endif %}
+
+                    {% if parameter_comparison_image2 != blank %}
+                      {{ 
+                        parameter_comparison_image2
+                        | image_url: width:parameter_comparison_image2.width
+                        | image_tag: 
+                          loading: 'lazy',
+                          alt: parameter_comparison_image2.alt,
+                          sizes: "400px", 
+                          widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                          class: 'qcpp-pro-meta-images'
+                      }}
+                    {% endif %}
+                    {% if parameter_comparison_text2 != blank %}
+                      <p class="qcpp-pro-meta-text">{{ parameter_comparison_text2 }}</p>
+                    {% endif %}
+
+                    {% if parameter_comparison_image3 != blank %}
+                      {{ 
+                        parameter_comparison_image3
+                        | image_url: width:parameter_comparison_image3.width
+                        | image_tag: 
+                          loading: 'lazy',
+                          alt: parameter_comparison_image3.alt,
+                          sizes: "400px", 
+                          widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                          class: 'qcpp-pro-meta-images'
+                      }}
+                    {% endif %}
+                    {% if parameter_comparison_text3 != blank %}
+                      <p class="qcpp-pro-meta-text">{{ parameter_comparison_text3 }}</p>
+                    {% endif %}
+
+                    {% if parameter_comparison_image4 != blank %}
+                      {{ 
+                        parameter_comparison_image4
+                        | image_url: width:parameter_comparison_image4.width
+                        | image_tag: 
+                          loading: 'lazy',
+                          alt: parameter_comparison_image4.alt,
+                          sizes: "400px", 
+                          widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                          class: 'qcpp-pro-meta-images'
+                      }}
+                    {% endif %}
+                    {% if parameter_comparison_text4 != blank %}
+                      <p class="qcpp-pro-meta-text">{{ parameter_comparison_text4 }}</p>
+                    {% endif %}
+                    <a class="qcpp-more" href="{{product.url}}">
+                      <span>Learn More</span>
+                      <svg t="1732692292089" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3028" width="200" height="200"><path d="M605.086476 512.146286L338.358857 245.272381l51.760762-51.687619 318.415238 318.585905L390.095238 830.415238l-51.687619-51.736381z" p-id="3029" fill="#0084C2"></path></svg>
+                    </a>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="swiper-scrollbar qcpp-bar bar-{{ section.id }}"></div>
+     </div>
+    </div>
+  </ql-product-comparison>
+</section>
+
+{% javascript %}
+  class QlProductComparison extends HTMLElement {
+    constructor() {
+      super();
+      this.init()
+    }
+    init () {
+      let sectionId = this.getAttribute("section-id")
+      let className = `.swiper-${sectionId}`
+      let barClassName = `.bar-${sectionId}`
+      const swiper = new Swiper(className, {
+        loop: false,
+        spaceBetween: 15,
+        slidesPerView: 2,
+        breakpoints: {
+          750: {
+            spaceBetween: 0,
+            slidesPerView: 4
+          }
+        },
+        scrollbar: {
+          el: barClassName,
+          hide: true,
+        },
+        freeMode: false
+      });
+    }
+  }
+  if (!customElements.get('ql-product-comparison')) {
+    customElements.define('ql-product-comparison', QlProductComparison);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Product Comparison",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product1",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_img",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "parameter_comparison_name",
+          "label": "Parameter Comparison Name"
+        },
+        {
+          "type": "text",
+          "id": "parameter_comparison_description",
+          "label": "Parameter Comparison Descrpition"
+        },
+        {
+          "type": "image_picker",
+          "id": "parameter_comparison_image1",
+          "label": "Parameter Comparison Image1"
+        },
+        {
+          "type": "text",
+          "id": "parameter_comparison_text1",
+          "label": "Parameter Comparison Text1"
+        },
+        {
+          "type": "image_picker",
+          "id": "parameter_comparison_image2",
+          "label": "Parameter Comparison Image2"
+        },
+        {
+          "type": "text",
+          "id": "parameter_comparison_text2",
+          "label": "Parameter Comparison Text2"
+        },
+        {
+          "type": "image_picker",
+          "id": "parameter_comparison_image3",
+          "label": "Parameter Comparison Image3"
+        },
+        {
+          "type": "text",
+          "id": "parameter_comparison_text3",
+          "label": "Parameter Comparison Text3"
+        },
+        {
+          "type": "image_picker",
+          "id": "parameter_comparison_image4",
+          "label": "Parameter Comparison Image4"
+        },
+        {
+          "type": "text",
+          "id": "parameter_comparison_text4",
+          "label": "Parameter Comparison Text4"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Comparison"
+    }
+  ]
+}
+{% endschema %}

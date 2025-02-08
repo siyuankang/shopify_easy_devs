@@ -1,0 +1,184 @@
+{% style %}
+  .product-discount-code-save, .product-discount-code-point {
+      background: {{ block.settings.save_bgcolor }} !important;
+    }
+    .product-discount-code {
+      background: {{ block.settings.bg_color }} !important;
+    }
+    .point, .product-discount-code-content {
+      color: {{ block.settings.text_color }} !important;
+    }
+    .product-discount-code-save, .product-discount-code-point {
+      color: {{ block.settings.save_txtcolor }} !important;
+    }
+    .product-discount-code-btn {
+      color: {{ block.settings.copy_color }} !important;
+    }
+{% endstyle %}
+<style>
+  .product-discount-code {
+    background: rgba(253, 212, 66, 0.07);
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    max-width: 492px;
+  }
+  .product-discount-code img {
+    max-width: 100%;
+  }
+  .point {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #3c3c3c;
+    width: 20px;
+    height: 20px;
+    background: #fdd442;
+    text-align: center;
+    border-radius: 50%;
+    letter-spacing: -0.24px;
+    cursor: pointer;
+  }
+  .product-discount-code-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-weight: 500;
+  }
+  .product-discount-code-save {
+    display: block;
+    letter-spacing: -0.28px;
+    color: #3c3c3c;
+    font-size: 14px;
+    font-weight: bold;
+    width: 90px;
+    border-radius: 100px;
+    background: #fdd442;
+    line-height: 28px;
+    height: 28px;
+    text-align: center;
+  }
+  .product-discount-code-content {
+    flex: 1;
+    font-size: 13px;
+    color: #3c3c3c;
+    line-height: 20px;
+  }
+  .product-discount-code-content-code {
+    margin-top: 5px;
+  }
+  .product-discount-code-btn {
+    color: #2c3990;
+    font-weight: bold;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  @media (max-width: 767px) {
+    .product-discount-code-save {
+      font-size: 12px;
+      width: 86px;
+      line-height: 25px;
+      height: 25px;
+    }
+    .product-discount-code-content {
+      font-size: 12px;
+    }
+  }
+</style>
+<div class="product-discount-code">
+  <div class="product-discount-code-left">
+    <div class="product-discount-code-save">
+      {% comment %} Save $20 {% endcomment %}
+      {{ block.settings.save }}
+    </div>
+    <div class="product-discount-code-content">
+      <div>
+        {% comment %} Get this item for <b class="product-discount-code-content-price">$59.99</b>with code auto-applied. Ends in Today {% endcomment %}
+        {{ block.settings.text }}
+        <span data-date="{{ block.settings.date }}" class="product-discount-code-countdown">
+          {% comment %} 00:00:00 {% endcomment %}
+        </span>
+      </div>
+      <div class="product-discount-code-content-code">
+        Code: <b class="codetxt">{{ block.settings.code }}</b>
+        <button id="copyBtn" onclick="copyCode()" class="product-discount-code-btn">Copy Code</button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <span class="point product-discount-code-point">!</span>
+  </div>
+</div>
+<script type="text/javascript" defer>
+  function copyCode() {
+    const codeTxt = document.querySelector('.codetxt');
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = codeTxt.textContent;
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextarea);
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.textContent = 'Copied';
+    setTimeout(() => {
+      copyBtn.textContent = 'Copy Code';
+    }, 3000);
+  }
+
+  const countdownElement = document.querySelector('.product-discount-code-countdown');
+  const startTime = document.querySelector('.product-discount-code-countdown').dataset.date;
+  const endTime = startTime ? new Date(startTime) : '';
+
+  function updateCountdown() {
+    const now = new Date();
+    const timeLeft = endTime - now;
+
+    if (timeLeft <= 0) {
+      countdownElement.textContent = '00:00:00';
+      document.querySelector('.product-discount-code-countdown').style.display = 'none';
+      return;
+    }
+
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+    const seconds = Math.floor((timeLeft / 1000) % 60);
+
+    const formatTime = (value) => value.toString().padStart(2, '0');
+    const formattedDays = formatTime(days);
+    const formattedHours = formatTime(hours);
+    const formattedMinutes = formatTime(minutes);
+    const formattedSeconds = formatTime(seconds);
+
+    if (days === '00') {
+      countdownElement.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    } else {
+      countdownElement.textContent = `${formattedDays}:${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    }
+  }
+
+  if (startTime !== '') setInterval(updateCountdown, 1000);
+
+  document.querySelectorAll('.product-discount-code-point').forEach((element) => {
+    element.addEventListener('click', () => {
+      document.querySelector('.product-discount-code-overlay').style.display = 'block';
+    });
+  });
+
+  document.querySelectorAll('.closeBtn').forEach((element) => {
+    element.addEventListener('click', () => {
+      document.querySelector('.product-discount-code-overlay').style.display = 'none';
+    });
+  });
+</script>
+{% comment %}
+  <script type="text/javascript" defer>
+    function copyCode(){const e=document.querySelector(".codetxt"),t=document.createElement("textarea");t.value=e.textContent,document.body.appendChild(t),t.select(),document.execCommand("copy"),document.body.removeChild(t);const n=document.getElementById("copyBtn");n.textContent="Copied",setTimeout(()=>{n.textContent="Copy Code"},3e3)}const countdownElement=document.querySelector(".product-discount-code-countdown"),startTime=document.querySelector(".product-discount-code-countdown").dataset.date,endTime=startTime?new Date(startTime):"";function updateCountdown(){const e=new Date,t=endTime-e;if(0<=t){countdownElement.textContent="00:00:00",document.querySelector(".product-discount-code-countdown").style.display="none";return}const n=Math.floor(t/864e5),o=Math.floor(t%864e5/36e5),s=Math.floor(t%36e5/6e4),r=Math.floor(t%6e4/1e3),a=(e)=>e.toString().padStart(2,"0"),i=a(n),d=a(o),u=a(s),c=a(r);i==="00"?countdownElement.textContent=`${d}:${u}:${c}`:countdownElement.textContent=`${i}:${d}:${u}:${c}`}startTime!==""&&setInterval(updateCountdown,1e3),document.querySelectorAll(".product-discount-code-point").forEach(e=>{e.addEventListener("click",()=>{document.querySelector(".product-discount-code-overlay").style.display="block"})}),document.querySelectorAll(".closeBtn").forEach(e=>{e.addEventListener("click",()=>{document.querySelector(".product-discount-code-overlay").style.display="none"})});
+  </script>
+{% endcomment %}

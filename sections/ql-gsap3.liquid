@@ -1,0 +1,447 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_md }}px;
+    padding-bottom: {{ section.settings.padding_bottom_md }}px;
+    background: {{ section.settings.bg_color_md }}
+  }
+  @media (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .full-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .full-contain {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  .qanim-an-wrap {
+    height: 100vh;
+    position: relative;
+  }
+  .qanim-an-wrap::before {
+    display: block;
+    content: '';
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+  }
+  .qanim-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: {{ section.settings.opacity | divided_by: 100.0 }}; 
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .qanim-logo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .1s;
+  }
+  .qanim-logo>img {
+    width: 422px;
+    height: auto;
+  }
+  .qanim-main {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%,-50%);
+    z-index: 5;
+    text-align: center;
+    opacity: 0;
+    color: #FFF;
+    width: 95%;
+    max-width: 713px;
+  }
+  .qanim-block-title {
+    font-size: 60px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: inherit;
+  }
+  .qanim-block-subtitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0px;
+    color: inherit;
+  }
+  .qanim-block-content {
+    font-size: 14px;
+    margin-top: 95px;
+    margin-bottom: 0px;
+    color: inherit;
+  }
+ 
+  @media screen and (max-width: 1024px) {
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }} ">
+  <q-about-animation speed="{{ section.settings.speed }}">
+    <div class="qanim-an-wrap">
+      {% assign img = section.settings.img %}
+      {% if img != blank %}
+        {{ 
+          img
+          | image_url: width:2560
+          | image_tag: 
+            loading: 'lazy',
+            alt: img.alt,
+            class: 'full-img pc-show'
+        }}
+      {% endif %}
+      {% assign img_md = section.settings.img_md | default: img %}
+      {% if img_md != blank %}
+        {{ 
+          img_md
+          | image_url: width:2560
+          | image_tag: 
+            loading: 'lazy',
+            alt: img_md.alt,
+            class: 'full-img mobile-show'
+        }}
+      {% endif %}
+
+      <div class="qanim-mask" id="{{ section.settings.id }}"></div>
+      <div class="qanim-logo">
+        {% assign img = section.settings.logo %}
+        {% if img != blank %}
+          {{ 
+            img
+            | image_url: width:300
+            | image_tag: 
+              loading: 'lazy',
+              alt: img.alt,
+              class: ''
+          }}
+        {% endif %}
+      </div>
+      {% for block in section.blocks %}
+        <div class="qanim-main qanim-item{{ forloop.index }}">
+          {% if block.settings.title != blank %}
+            <h1 class="qanim-block-title">{{ block.settings.title }}</h1>
+          {% endif %}
+          {% if block.settings.subtitle1 != blank %}
+            <h4 class="qanim-block-subtitle">{{ block.settings.subtitle1 }}</h4>
+          {% endif %}
+          {% if block.settings.subtitle2 != blank %}
+            <h4 class="qanim-block-subtitle">{{ block.settings.subtitle2 }}</h4>
+          {% endif %}
+          {% if block.settings.content != blank %}
+            <p class="qanim-block-content">{{ block.settings.content }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </q-about-animation>
+</section>
+
+{% javascript %}
+class AboutAnimation extends HTMLElement {
+  constructor() {
+    super();
+    this.init()
+  }
+  init () {
+    let speed = this.getAttribute("speed") * 100
+    gsap.registerPlugin(ScrollTrigger)
+    let st = ScrollTrigger.create({
+      trigger: ".qanim-an-wrap",
+      start: "top top",
+      end: "+=" + speed,
+      scrub: true,
+      markers: false,
+      pin:true,
+      animation: gsap.timeline()
+      .fromTo(
+        ".qanim-logo", 
+        {
+          transform:'scale(1)',
+          opacity: "1"
+        }, 
+        {
+          transform:'scale(2)',ease: "none",
+          opacity: "0",ease: "none"
+        }
+      )
+      .fromTo(
+        ".qanim-item1", 
+        {
+          top: "60%",
+          opacity: "0",
+        }, 
+        {
+          top: "50%",
+          opacity: "1"
+        }
+      )
+      .fromTo(
+        ".qanim-item1", 
+        {
+          opacity: "1",
+        }, 
+        {
+          opacity: "1"
+        }
+      )
+      .fromTo(
+        ".qanim-item1", 
+        {
+          // top: "50%",
+          // opacity: "1"
+          transform:'translate(-50%,-50%) scale(1)',
+        },
+        {
+          // top: "40%",
+          // opacity: "0",
+          transform:'translate(-50%,-50%) scale(0)',
+        }
+      )
+      .fromTo(
+        ".qanim-item2", 
+        {
+          top: "60%",
+          opacity: "0",
+        }, 
+        {
+          top: "50%",
+          opacity: "1"
+        }
+      )
+      .fromTo(
+        ".qanim-item2", 
+        {
+          opacity: "1",
+        }, 
+        {
+          opacity: "1"
+        }
+      )
+      .fromTo(
+        ".qanim-item2", 
+        {
+          // top: "50%",
+          // opacity: "1"
+          transform:'translate(-50%,-50%) scale(1)',
+        },
+        {
+          // top: "40%",
+          // opacity: "0",
+          transform:'translate(-50%,-50%) scale(0)',
+        }
+      )
+      .fromTo(
+        ".qanim-item3", 
+        {
+          top: "60%",
+          opacity: "0",
+        }, 
+        {
+          top: "50%",
+          opacity: "1"
+        }
+      )
+      .fromTo(
+        ".qanim-item3", 
+        {
+          opacity: "1",
+        }, 
+        {
+          opacity: "1"
+        }
+      )
+      // .fromTo(
+      //   ".qanim-item2", 
+      //   {
+      //     top: "50%",
+      //     opacity: "1"
+      //   },
+      //   {
+      //     top: "40%",
+      //     opacity: "0",
+      //   }
+      // )
+    });
+  }
+}
+if (!customElements.get('q-about-animation')) {
+  customElements.define('q-about-animation', AboutAnimation);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "GSAP-about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "id",
+      "label": "Id"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_md",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Transparency of the mask layer",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Speed",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle1",
+          "label": "Subtitle 1"
+        },
+        {
+          "type": "text",
+          "id": "subtitle2",
+          "label": "Subtitle 2"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GSAP-about"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,526 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_md }}px;
+    padding-bottom: {{ section.settings.padding_bottom_md }}px;
+    background: {{ section.settings.bg_color_md }};
+  }
+  @media (min-width: 1024px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }};
+    }
+  }
+  .acco-wrap {
+    display: flex;
+    height: {{ section.settings.desktop_height }}px;
+  }
+  .section-{{ section.id }} .acc-item {
+    /* width: 18%; */
+    flex: 1;
+    height: 100%;
+    transition: 0.6s;
+    cursor: pointer;
+    position: relative;
+  }
+  .acc-item.act {
+    width: 300px !important;
+    height: 300px !important;
+  }
+  .acc-item.act .acco-main {
+    opacity: 1;
+  }
+  .acco-img {
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+  }
+  .section-{{ section.id }} .acco-main {
+    position: absolute;
+    left: 0;
+    width: 95%;
+    z-index: 15;
+    color: var(--text_color);
+    padding: 0 50px;
+    opacity: 0;
+    transition: 1s;
+  }
+  .acc-potition-top {
+    top: 50px;
+  }
+  .acc-potition-middle {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .acc-potition-bottom {
+    bottom: 50px;
+  }
+  .acco-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: inherit;
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .acco-content {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: inherit;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .acco-btn-wrap {
+    margin-top: 35px;
+  }
+  .section-{{ section.id }} .acco-btn {
+    font-size: 15px;
+    background: {{section.settings.button_bg_color}};
+    padding: 13px 30px;
+    border-radius: 30px;
+    color: {{section.settings.button_text_color}};
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+    text-wrap: nowrap;
+  }
+  .section-{{ section.id }} .acco-btn:hover {
+    background: {{section.settings.button_hover_bg_color}};
+    color: {{section.settings.button_hover_text_color}};
+  }
+  .acco-swiper-item {
+    width: 80%;
+    position: relative;
+  }
+  .acco-imgpad {
+    padding-top: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .acco-title-text {
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .acco-content-text {
+    padding-bottom: 40px;
+    font-size: 16px;
+    max-width: 660px;
+    margin: auto;
+  }
+  .full-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    object-fit: cover;
+  }
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  @media screen and (max-width: 750px) {
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .acco-wrap {
+      height: {{ section.settings.mobile_height }}px;
+    }
+    .acco-title-text {
+      padding-bottom: 15px;
+      font-size: 36px;
+    }
+    .acco-content-text {
+      padding-bottom: 40px;
+      font-size: 15px;
+    }
+    .acco-main {
+      width: 100%;
+      padding: 0 20px;
+      opacity: 1;
+      box-sizing: border-box;
+    }
+    .acc-potition-top {
+      top: 50px;
+    }
+    .acc-potition-middle {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .acc-potition-bottom {
+      bottom: 50px;
+    }
+    .acco-title {
+      font-size: 36px;
+    }
+    .acco-content {
+      font-size: 20px;
+    }
+    .acco-btn-wrap {
+      margin-top: 35px;
+    }
+    .acco-btn {
+      font-size: 14px;
+      width: 100%;
+      display: block;
+      text-align: center;
+      padding: 5px 30px;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <q-accordion section-id="{{ section.id }}">
+    <div class="page-width">
+      {% if section.settings.title!=blank %}
+        <h1 class="acco-title-text center">{{section.settings.title}}</h1>
+      {% endif %}
+      {% if section.settings.content!=blank %}
+        <p class="acco-content-text center">{{section.settings.content}}</p>
+      {% endif %}
+    </div>
+    <div class="{% if section.settings.full_screen == false %}page-width{% endif %}">
+      {% comment %} <div class="pc-show"> {% endcomment %}
+        <div class="acco-wrap">
+          {% for block in section.blocks %}
+            <div class="acc-item {% if forloop.first %} act {% endif %}">
+              {% assign desktop_image = block.settings.desktop_image %}
+              {% if desktop_image != blank %}
+                {{ 
+                  desktop_image
+                  | image_url: width:1000
+                  | image_tag: 
+                    loading: 'lazy',
+                    draggable: false,
+                    preload: false,
+                    alt: imageTag.alt,
+                    class: 'acco-img pc-show'
+                }}
+              {% endif %}
+              {% assign mobile_image = block.settings.mobile_image | default: desktop_image %}
+              {% if mobile_image != blank %}
+                {{ 
+                  mobile_image
+                  | image_url: width:1000
+                  | image_tag: 
+                    loading: 'lazy',
+                    draggable: false,
+                    preload: false,
+                    alt: imageTag.alt,
+                    class: 'acco-img mobile-show'
+                }}
+              {% endif %}
+
+              <div class="acco-main acc-potition-{{block.settings.position}}" style="--text_color:{{ block.settings.text_color }}">
+                {% if block.settings.title != blank %}
+                  <h1 class="acco-title">{{block.settings.title | newline_to_br}}</h1>
+                {% endif %}
+                {% if block.settings.content != blank %}
+                  <div class="acco-content">{{block.settings.content | newline_to_br}}</div>
+                {% endif %}
+                {% if block.settings.url != blank %}
+                  <div class="acco-btn-wrap">
+                    <a class="acco-btn" href="{{block.settings.url}}">
+                      {{block.settings.btn}}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% comment %} </div> {% endcomment %}
+            
+      {% comment %} <div class="mobile-show">
+        <div class="acco-swiper swiper swiper-{{ section.id }}">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              <div class="acco-swiper-item swiper-slide">
+                <div class="acco-imgpad">
+                  {% assign mobile_image = block.settings.mobile_image %}
+                  {% if mobile_image != blank %}
+                    {{ 
+                      mobile_image
+                      | image_url: width:1920
+                      | image_tag: 
+                        loading: 'lazy',
+                        draggable: false,
+                        preload: false,
+                        alt: imageTag.alt,
+                        class: 'full-img'
+                    }}
+                  {% endif %}
+                </div>
+                <div class="acco-main acc-potition-{{block.settings.position}}">
+                  {% if block.settings.title != blank %}
+                    <h1 class="acco-title">{{block.settings.title}}</h1>
+                  {% endif %}
+                  {% if block.settings.content != blank %}
+                    <div class="acco-content">{{block.settings.content}}</div>
+                  {% endif %}
+                  {% if block.settings.btn != blank %}
+                    <div class="acco-btn-wrap">
+                      <a class="acco-btn" href="{{block.settings.url}}">
+                        {{block.settings.btn}}
+                      </a>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination pagination-{{ section.id }}"></div>
+
+        </div>
+      </div> {% endcomment %}
+    </div>
+  </q-accordion>
+</section>
+
+{% javascript %}
+var QAccordion = class extends HTMLElement {
+  constructor() {
+    super();
+    this.init()
+  }
+  init() {
+    let items = this.querySelectorAll(".acc-item")
+    items.forEach(item => {
+      item.addEventListener("mouseenter", () => {
+        items.forEach(ite => {
+          ite.classList.remove('act')
+        })
+        item.classList.add("act")
+      })
+    })
+    let id = this.getAttribute("section-id")
+    let className = '.swiper-' + id
+    let className1 = '.pagination-' + id
+    const swiper = new Swiper(className, {
+      loop: true,
+      spaceBetween: 20,
+      slidesPerView: 'auto',
+      pagination: {
+        el: className1
+      }
+    })
+  }
+};
+if (!window.customElements.get("q-accordion")) {
+  window.customElements.define("q-accordion", QAccordion);
+}
+{% endjavascript %}
+
+{% schema %}
+ {
+  "name": "Accordion v1",
+  "settings": [
+    {
+      "type":"checkbox",
+      "id": "full_screen",
+      "label": "Full Screen"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop Height",
+      "default": 650
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Height",
+      "default": 400
+    }, 
+    {
+      "type":"text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type":"textarea",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 36
+    }, 
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_top_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 36
+    }, 
+    {
+      "type": "range",
+      "id": "padding_bottom_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background",
+      "default": "#F5F5F7"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background",
+      "default": "#F5F5F7"
+    },
+    {
+      "type": "header",
+      "content": "Button settings"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button Hover Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type":"select",
+          "id": "position",
+          "label": "Content Position",
+          "options": [
+            {
+              "label": "Top",
+              "value": "top"
+            },
+            {
+              "label": "Middle",
+              "value": "middle"
+            },
+            {
+              "label": "Bottom",
+              "value": "bottom"
+            }
+          ],
+          "default": "middle"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type":"textarea",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type":"textarea",
+          "id": "content",
+          "label": "content"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop Image",
+          "info": "size:628*650"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image",
+          "info": "size:340*544"
+        },
+        {
+          "type":"text",
+          "id": "btn",
+          "label": "Button text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Button link"
+        }   
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion v1"
+    }
+  ]
+ }
+{% endschema %}

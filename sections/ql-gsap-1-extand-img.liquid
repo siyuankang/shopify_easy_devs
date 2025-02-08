@@ -1,0 +1,241 @@
+<style>
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_md }}px;
+    padding-bottom: {{ section.settings.padding_bottom_md }}px;
+    background: {{ section.settings.bg_color_md }}
+  }
+  @media (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .exi-title {
+    font-size: 34px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  .exi-trigger {
+    position: relative;
+    height: 100vh;
+    border: solid transparent 1px;
+  }
+  .exi-img-wrap {
+    width: 15%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .section-{{ section.id }} .exi-img-padding {
+    position: relative;
+    padding-top: {{ section.settings.aspect_ratio }}%;
+  }
+  .full-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    border-radius: 8px;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .exi-item0 {
+    z-index: 10;
+  }
+  .exi-item1 {
+    z-index: 9;
+  }
+  .exi-item2 {
+    z-index: 8;
+  }
+  .exi-item3 {
+    z-index: 7;
+  }
+  .exi-item4 {
+    z-index: 9;
+  }
+  .exi-item5 {
+    z-index: 8;
+  }
+  .exi-item6 {
+    z-index: 7;
+  }
+  @media screen and (max-width: 768px) {
+    .exi-trigger {
+      height: 50vh;
+    }
+    .exi-title {
+      font-size: 24px;
+      margin-top: 70px;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <q-extand-image sid="{{ section.id }}">
+    <div class="exi-an-wrap trigger-{{ section.id }}">
+      <div class="exi-trigger">
+        <div class="page-width">
+          {% if section.settings.title != blank %}
+            <div class="page-width">
+              <h3 class="exi-title">{{ section.settings.title }}</h3>
+            </div>
+          {% endif %}
+        </div>
+        {% for block in section.blocks %}
+          <div class="exi-img-wrap exi-item{{forloop.index0}}">
+            {% assign img = block.settings.img %}
+            {% assign className = "exi-img-padding exi-img" | append: forloop.index0 %}
+            {% assign className1 = "exi-img-" | append: section.id | append: forloop.index0 %}
+            <div class="{{ className }} {{ className1 }}" >
+              {% if img != blank %}
+                {{
+                  img
+                  | image_url: width: 500
+                  | image_tag:
+                    loading: 'lazy',
+                    alt: img.alt,
+                    class: "full-img"
+                }}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </q-extand-image>
+</section>
+
+{% javascript %}
+
+var QExtandImage = class extends HTMLElement {
+  connectedCallback() {
+    let sid = this.getAttribute("sid")
+    let className1 = ".exi-img-" + sid
+    document.addEventListener("DOMContentLoaded", (event) => {
+      gsap.registerPlugin(ScrollTrigger)
+      let st = ScrollTrigger.create({
+        trigger: ".trigger-" + sid,
+        start: "center center",
+        end: "+=400",
+        scrub: true,
+        markers: false,
+        pin:true,
+        animation: gsap.timeline()
+        .fromTo(className1 + '0', {left: "0%",transform:'scale(1.2)'}, {left: "0%",transform:'scale(1)',ease: "none"}, "<")
+        .fromTo(className1 + '1', {left: "0%"}, {left: "-100%",transform:'scale(0.9)',ease: "none"}, "<")
+        .fromTo(className1 + '2', {left: "0%"}, {left: "-190%",transform:'scale(0.8)',ease: "none"}, "<")
+        .fromTo(className1 + '3', {left: "0%"}, {left: "-270%",transform:'scale(0.7)',ease: "none"}, "<")
+        .fromTo(className1 + '4', {left: "0%"}, {left: "100%",transform:'scale(0.9)',ease: "none"}, "<")
+        .fromTo(className1 + '5', {left: "0%"}, {left: "190%",transform:'scale(0.8)',ease: "none"}, "<")
+        .fromTo(className1 + '6', {left: "0%"}, {left: "270%",transform:'scale(0.7)',ease: "none"}, "<")
+      });
+    });
+  }
+}
+if (!window.customElements.get("q-extand-image")) {
+  window.customElements.define("q-extand-image", QExtandImage);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Extand Image",
+  "max_blocks": 7,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "title"
+    },
+    {
+      "type": "range",
+      "id": "aspect_ratio",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Aspect Ratio",
+      "default": 200
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background",
+      "default": "#F5F5F7"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background",
+      "default": "#F5F5F7"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_top_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Extand Image"
+    }
+  ]
+}
+{% endschema %}

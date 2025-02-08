@@ -1,0 +1,290 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background: {{ section.settings.bg_color }}
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .fpwi-title {
+    font-size: 56px;
+    font-weight: bold;
+    margin: 0 0 80px;
+  }
+  .fpwi-flex {
+    display: flex;
+    background: #F5F5F7;
+    border-radius: 20px;
+  }
+  .fpwi-left {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .fpwi-right {
+    width: 60%;
+    padding: 20px 0;
+  }
+  .fpwi-ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 350px;
+  }
+  .fpwi-li {
+    border-bottom: solid #ebebeb 1px;
+  }
+  .fpwi-li[show="1"] .fpwi-arrow {
+    transform: rotate(180deg);
+  }
+  .fpwi-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  .fpwi-arrow {
+    transition: .5s;
+  }
+  .fpwi-content {
+    transition: .5s;
+    font-size: 14px;
+    height: 0;
+    overflow: hidden;
+  }
+  .fpwi-img-wrap {
+    width: 100%;
+    padding-top: 80%;
+    position: relative;
+  }
+  .fpwi-img-wrap>img {
+    display: none;
+  }
+  .full-contain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    object-fit: contain;
+  }
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  @media screen and (max-width: 1024px) {
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .fpwi-left {
+      width: 100%;
+      padding: 10px 15px;
+    }
+    .fpwi-right {
+      display: none;
+    }
+    .fpwi-md-img {
+      width: 75%;
+      display: block;
+      margin: 20px auto;
+      height: auto;
+    }
+    .fpwi-item-header {
+      font-size: 20px;
+    }
+    .fpwi-content {
+      font-size: 13px;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <ql-folding-panel-with-image>
+    <div class="page-width">
+      {% if section.settings.title %}
+        <h2 class="fpwi-title">{{section.settings.title}}</h2>
+      {% endif %}
+      <div class="fpwi-flex">
+        <div class="fpwi-left">
+          <ul class="fpwi-ul"> 
+            {% for block in section.blocks %}
+              <li class="fpwi-li">
+                <div class="fpwi-item-header">
+                  <span>{{ block.settings.title }}</span>
+                  <svg t="1733277668448" class="fpwi-arrow" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2292" width="20" height="20"><path d="M80.224 213.344L0 293.12l512 512 512-512-79.776-79.776L512 645.568 80.224 213.344z" p-id="2293" fill="#7C7C7C"></path></svg>
+                </div>
+                <div class="fpwi-content">
+                  <div class="fpwi-main">
+                    <div>{{ block.settings.content }}</div>
+                    {% assign img = block.settings.image %}
+                    {% if img != blank %}
+                      {{ 
+                        img
+                        | image_url: width:img.width
+                        | image_tag: 
+                          loading: 'lazy',
+                          alt: img.alt,
+                          sizes: "800px", 
+                          widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                          class: 'fpwi-md-img mobile-show'
+                      }}
+                    {% endif %}
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="fpwi-right">
+          <div class="fpwi-img-wrap pc-show">
+            {% for block in section.blocks %}
+              {% assign img = block.settings.image %}
+              {% if img != blank %}
+                {{ 
+                  img
+                  | image_url: width:img.width
+                  | image_tag: 
+                    loading: 'lazy',
+                    alt: img.alt,
+                    sizes: "800px", 
+                    widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                    class: 'full-contain'
+                }}
+              {% endif %}
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ql-folding-panel-with-image>
+
+</section>
+{%  javascript  %} 
+class FoldingPanelWithImage extends HTMLElement {
+  constructor() {
+    super();
+    this.init()
+  }
+  init () {
+    let oLis = this.querySelectorAll(".fpwi-li")
+    let oImgs = this.querySelectorAll(".fpwi-img-wrap>img")
+    let oBtns = this.querySelectorAll(".fpwi-item-header")
+    let oContents = this.querySelectorAll(".fpwi-content")
+    let oMains = this.querySelectorAll(".fpwi-main")
+    oBtns.forEach((item,i) => {
+      item.addEventListener("click",() => {
+        oContents.forEach(b => {
+          b.style.height = '0'
+        })
+        oLis.forEach(b => {
+          b.setAttribute('show', "")
+        })
+        oImgs.forEach(b => {
+          b.style.display = 'none'
+        })
+        let height = oMains[i].offsetHeight
+        oContents[i].style.height = height + "px"
+        oImgs[i].style.display = "block"
+        oLis[i].setAttribute('show', "1")
+      })
+    })
+    if (oBtns[0]) {
+      oBtns[0].click()
+    }
+  }
+}
+if (!customElements.get('ql-folding-panel-with-image')) {
+  customElements.define('ql-folding-panel-with-image', FoldingPanelWithImage);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Folding Panel With Image",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+      {
+        "type": "item",
+        "name": "Item",
+        "settings": [
+          {
+            "type":"text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type":"textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Folding Panel With Image"
+    }
+  ]
+}
+{% endschema %}

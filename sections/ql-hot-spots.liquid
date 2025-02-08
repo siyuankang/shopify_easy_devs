@@ -1,0 +1,589 @@
+{%- style -%}
+/* .section-{{ section.id }} div:empty {
+  display: block;
+} */
+.section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top_md }}px;
+  padding-bottom: {{ section.settings.padding_bottom_md }}px;
+  background: {{ section.settings.bg_color_md }}
+}
+@media (min-width: 750px) {
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.bg_color }}
+  }
+}
+
+@keyframes cycleani {
+  0%{
+    transform: scale(1.3);
+  }
+  50%{
+    transform: scale(1.55);
+  }
+  100%{
+    transform: scale(1.3);
+  }
+}
+.section-{{ section.id }} {
+  .h-p-mask {
+    position: fixed;
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0);
+    display: none;
+    &[show=true] {
+      display: block !important;
+    }
+  }
+  .height0-rela {
+    height: 0;
+    position: relative;
+  }
+  .host-spot-header-wrapper {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding-top: 50px;
+    .max-widht330 {
+      width: 330px;
+      color: {{ section.settings.text_color }};
+      .hot-spot-heading {
+        font-size: 42px;
+        margin: 0;
+        font-weight: bold;
+        color: inherit;
+      }
+      .hot-spot-content {
+        font-size: 20px;
+        margin: 20px 0 0;
+        color: inherit;
+      }
+    }
+  }
+  .hot-spot-wrapper {
+    position:relative;
+    z-index: unset;
+  }
+  .host-spot-img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+  .hot-spot-items {
+    position: absolute;
+    z-index: unset;
+  }
+  {% for block in section.blocks %} 
+    .h-s-item-{{forloop.index0}} {
+      left: {{block.settings.horizontal_position}}%;
+      top: {{block.settings.vertical_position}}%;
+    }
+  {% endfor %}
+
+  .h-s-item-relative {
+    position: relative;
+    z-index: unset;
+    .h-s-btn {
+      width: 45px;
+      height: 45px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* line-height: 45px; */
+      text-align: center;
+      color: #000000;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.2s;
+      position: relative;
+      z-index: 1;
+      &[show=true] {
+        transform: rotate(45deg);
+      }
+      &::before {
+        display: block;
+        content: "";
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: rgba(255,255,255,0.5);
+        transform: scale(1.2);
+        z-index: -1;
+        animation: cycleani 4s infinite linear;
+      }
+    }
+    .h-s-item-main {
+      position: absolute;
+      left: calc(100% + 20px);
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 24px;
+      width: 380px;
+      border-radius: 10px;
+      background:#EBEBEB;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+      z-index: 15;
+      &[show=true] {
+        visibility: visible;
+        opacity: 1;
+      }
+      &.h-s-align-left {
+        left: initial;
+        right: calc(100% + 20px);
+      }
+      .h-s-main-title {
+        font-size: 20px;
+        margin: 0;
+        font-weight: bold;
+      }
+      .h-s-main-desc {
+        font-size: 16px;
+        line-height: 1.4;
+        margin: 16px 0 0;
+      }
+    }
+  }
+  .h-s-mobile-main {
+    position: fixed;
+    bottom: 37px;
+    left: 20px;
+    padding: 32px;
+    width: calc(100% - 40px);
+    border-radius: 10px;
+    background:#ffffff;
+    z-index: 30;
+    display: none;
+    .h-s-close-wrap {
+      height: 0;
+      position: relative;
+      .h-s-close-btn {
+        position: absolute;
+        left: 50%;
+        top: -100px;
+        transform: translateX(-50%);
+        width: 45px;
+        height: 45px;
+        background: #FFFFFF;
+        border-radius: 50%;
+        line-height: 45px;
+        text-align: center;
+        color: #000000;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.2s;
+      }
+    }
+    .h-s-mb-content {
+      display: none;
+      &[show=true] {
+        display: block;
+      }
+    }
+    .h-s-main-title {
+      font-size: 16px;
+      margin: 0;
+    }
+    .h-s-main-desc {
+      font-size: 13px;
+      margin: 16px 0 0;
+    }
+  }
+
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  @media screen and (max-width: 750px) {
+    .height0-rela {
+      height: auto;
+    }
+    .host-spot-header-wrapper {
+      position: static;
+      color: #000000; 
+      padding: 0;
+      padding-bottom: 30px;
+      .max-widht330 {
+        width: 100%;
+        color: {{ section.settings.text_color_md }};
+        .hot-spot-heading {
+          font-size: 24px;
+        }
+        .hot-spot-content {
+          font-size: 14px;
+          margin: 15px 0 0;
+        }
+      }
+    }
+    {% for block in section.blocks %} 
+      .h-s-item-{{forloop.index0}} {
+        left: {{block.settings.horizontal_position_mobile}}%;
+        top: {{block.settings.vertical_position_mobile}}%;
+      }
+    {% endfor %}
+    .h-s-btn {
+      width: 40px !important;
+      height: 40px !important;
+      background: #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #000000;
+      font-size: 18px;
+    }
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .h-p-mask {
+      background: rgba(0,0,0,0.5);
+    }
+    .h-s-item-main {
+      display: none !important;
+    }
+    .h-s-mobile-main {
+      &[show=true] {
+        display: block;
+      }
+    }
+  }
+}
+{%- endstyle -%}
+
+<section class="section-{{ section.id }} section-{{ section.id }}-padding">
+  <hot-spots>
+    <div class="h-p-mask"></div>
+
+    <div class="height0-rela">
+      <div class="host-spot-header-wrapper">
+        <div class="page-width">
+          <div class="max-widht330">
+            {% if section.settings.title != blank %}
+              <h2 class="hot-spot-heading">{{section.settings.title}}</h2>
+            {% endif %}
+            {% if section.settings.content != blank %}
+              <p class="hot-spot-content">{{section.settings.content}}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="hot-spot-wrapper">
+      {% assign img = section.settings.image %}
+      {% if img != blank %}
+        {{
+          img
+          | image_url: width: 3800
+          | image_tag:
+            loading: 'lazy',
+            alt: img.alt,
+            class: "pc-show host-spot-img"
+        }}
+      {% endif %}
+
+      {% assign image_md = section.settings.mobile_image | default: img %}   
+      {% if image_md != blank %}
+        {{
+          image_md
+          | image_url: width: 3800
+          | image_tag:
+            loading: 'lazy',
+            alt: image_md.alt,
+            class: "mobile-show host-spot-img"
+        }}
+      {% endif %}     
+      {% for block in section.blocks %} 
+        <div class="hot-spot-items h-s-item-{{forloop.index0}}" 
+          styles="left: {{block.settings.horizontal_position}}%; top:{{block.settings.vertical_position}}%;"
+        >
+          <div class="h-s-item-relative ">
+            <div class="h-s-btn">
+              <svg t="1735895351545" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2287" width="20" height="20"><path d="M576 64H448v384H64v128h384v384h128V576h384V448H576z" fill="#262626" p-id="2288"></path></svg>
+            </div>
+            {% assign d = block.settings.direction %}
+            <div class="h-s-item-main {% if d =='left' %}h-s-align-left{% endif %}">
+              <p class="h-s-main-title">{{block.settings.title}}</p>
+              <p class="h-s-main-desc">{{block.settings.content}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="h-s-mobile-main" show="false">
+      <div class="h-s-close-wrap">
+        <div class="h-s-close-btn">×</div>
+      </div>
+      {% for block in section.blocks %} 
+        <div class="h-s-mb-content">
+          <p class="h-s-main-title">{{block.settings.title}}</p>
+          <p class="h-s-main-desc">{{block.settings.content}}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </hot-spots>
+</section>
+
+{% javascript %}
+var HotSpots = class extends HTMLElement {
+  constructor() {
+    super();
+    this.init()
+  }
+  init() {
+    let oMask = this.querySelector(".h-p-mask")
+    let oSpots = this.querySelectorAll(".h-s-btn")
+    let oContains = this.querySelectorAll(".h-s-item-main")
+    let oCloseBtn = this.querySelectorAll(".h-s-close-btn")
+    let oMobileMain = this.querySelector(".h-s-mobile-main")
+    let oMobileContent = this.querySelectorAll(".h-s-mb-content")
+    function show (i) {
+      let current = oSpots[i].getAttribute("show")
+      if (current=='true') {
+        hide()
+        return  
+      }
+      oMask.setAttribute("show", 'true')
+      oSpots.forEach(t => {
+        t.setAttribute("show", false)
+      });
+      oSpots[i].setAttribute("show", 'true')
+      oContains.forEach(t => {
+        t.setAttribute("show", false)
+      });
+      oContains[i].setAttribute("show", 'true')
+      oMobileContent.forEach(t => {
+        t.setAttribute("show", false)
+      });
+      oMobileContent[i].setAttribute("show", 'true')
+      oMobileMain.setAttribute("show", 'true')
+    }
+    function hide () {
+      oMask.setAttribute("show", false)
+      oSpots.forEach(t => {
+        t.setAttribute("show", false)
+      });
+      oContains.forEach(t => {
+        t.setAttribute("show", false)
+      });
+      oMobileMain.setAttribute("show", 'false')
+    }
+    oMask.onclick = () => {
+      hide()
+    }
+    oSpots.forEach((btn, i) => {
+      btn.onclick = (e) => {
+        show(i)
+      };
+    });
+    oCloseBtn.forEach((btn, i) => {
+      btn.onclick = (e) => {
+        hide(i)
+      };
+    });
+  }
+}
+if (!window.customElements.get("hot-spots")) {
+  window.customElements.define("hot-spots", HotSpots);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Hot Spots",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Desktop Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color_md",
+      "label": "Mobile Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "2500 x 1200px .jpg recommended"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "1500 x 1900px .jpg recommended. Default to desktop image."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background",
+      "default": "#F5F5F7"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background",
+      "default": "#F5F5F7"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 0
+    }
+    
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "select",
+          "id": "direction",
+          "label": "Direction",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+
+          ],
+          "default": "right"
+        },
+        {
+          "type": "range",
+          "id": "horizontal_position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "vertical_position",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "horizontal_position_mobile",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position (mobile image)",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "vertical_position_mobile",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position (mobile image)",
+          "default": 30
+        }
+      ]
+      
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hot Spots"
+    }
+  ]
+}
+{% endschema %}

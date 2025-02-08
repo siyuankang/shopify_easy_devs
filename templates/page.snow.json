@@ -1,0 +1,287 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ql_swiper_4_dj_slidershow_Yd8zKK": {
+      "type": "ql-swiper-4-dj-slidershow",
+      "blocks": {
+        "slider_4WKtWH": {
+          "type": "slider",
+          "settings": {
+            "title_1": "",
+            "title_2": "This is a title",
+            "title_3": "This is a contents",
+            "text_color": "#ffffff",
+            "desktop_image": "shopify://shop_images/sd1.webp",
+            "mobile_image": "shopify://shop_images/z8_750x_71ae8a33-0923-4e29-a7d7-faa082272671.webp",
+            "url": "",
+            "btn_1_text": "了解更多",
+            "url_2": "",
+            "btn_2_text": "立即购买"
+          }
+        },
+        "slider_TGWhcp": {
+          "type": "slider",
+          "settings": {
+            "title_1": "555",
+            "title_2": "555",
+            "title_3": "555",
+            "text_color": "#334fb4",
+            "desktop_image": "shopify://shop_images/sd.jpg",
+            "mobile_image": "shopify://shop_images/AGO_T-4_m_1.jpg",
+            "url": "",
+            "btn_1_text": "了解更多",
+            "url_2": "",
+            "btn_2_text": "立即购买"
+          }
+        },
+        "slider_tJDkAB": {
+          "type": "slider",
+          "settings": {
+            "title_1": "双摄旗舰旅拍无人机",
+            "title_2": "DJ AIR 3S",
+            "title_3": "尽显风光",
+            "text_color": "#ffffff",
+            "desktop_image": "shopify://shop_images/b976c6de4bb48ffe42cbb0fc75cd91ad.jpg",
+            "mobile_image": "shopify://shop_images/b976c6de4bb48ffe42cbb0fc75cd91ad.jpg",
+            "url": "shopify://pages/store-locator",
+            "btn_1_text": "了解更多",
+            "url_2": "shopify://products/stormi",
+            "btn_2_text": "立即购买"
+          }
+        },
+        "slider_9TzX3z": {
+          "type": "slider",
+          "settings": {
+            "title_1": "222",
+            "title_2": "222",
+            "title_3": "222",
+            "text_color": "#ffffff",
+            "desktop_image": "shopify://shop_images/AGO_X-pc-transformed.jpg",
+            "mobile_image": "shopify://shop_images/AGO_X-pc-transformed.jpg",
+            "url": "shopify://products/the-collection-snowboard-hydrogen",
+            "btn_1_text": "了解更多",
+            "url_2": "",
+            "btn_2_text": "立即购买"
+          }
+        },
+        "slider_P7cwND": {
+          "type": "slider",
+          "settings": {
+            "title_1": "333",
+            "title_2": "333",
+            "title_3": "333",
+            "text_color": "#ffffff",
+            "desktop_image": "shopify://shop_images/zebra5_750x_85411e9d-8807-4ea1-ac63-8f18ad407fbf.webp",
+            "mobile_image": "shopify://shop_images/zebra5_750x_85411e9d-8807-4ea1-ac63-8f18ad407fbf.webp",
+            "url": "",
+            "btn_1_text": "了解更多",
+            "url_2": "",
+            "btn_2_text": "立即购买"
+          }
+        }
+      },
+      "block_order": [
+        "slider_4WKtWH",
+        "slider_TGWhcp",
+        "slider_tJDkAB",
+        "slider_9TzX3z",
+        "slider_P7cwND"
+      ],
+      "settings": {
+        "title": "",
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "q_dj_four_image_text_D4hkFw": {
+      "type": "ql-dj-four-image-text",
+      "blocks": {
+        "slider_HCiT38": {
+          "type": "slider",
+          "settings": {
+            "title_1": "掌上Vlog无人机",
+            "title_2": "航拍无人机这怎么选",
+            "title_3": "日夜出彩",
+            "text_color": "#121212",
+            "desktop_image": "shopify://shop_images/f1.webp",
+            "mobile_image": "shopify://shop_images/f1.webp",
+            "url_1": "shopify://products/small-naomi",
+            "btn_1_text": "了解更多",
+            "url_2": "shopify://pages/reviews",
+            "btn_2_text": "立即购买"
+          }
+        },
+        "slider_ypMR3t": {
+          "type": "slider",
+          "settings": {
+            "title_1": "迷你航拍无人机",
+            "title_2": "DJ aaww",
+            "title_3": "小，成大作",
+            "text_color": "#334fb4",
+            "desktop_image": "shopify://shop_images/f2.webp",
+            "mobile_image": "shopify://shop_images/f2.webp",
+            "url_1": "shopify://products/small-naomi",
+            "btn_1_text": "了解更多",
+            "url_2": "shopify://products/selling-plans-ski-wax",
+            "btn_2_text": "立即购买"
+          }
+        },
+        "slider_jkfErB": {
+          "type": "slider",
+          "settings": {
+            "title_1": "旗舰无人机",
+            "title_2": "DJ PRO PLUS",
+            "title_3": "看这里",
+            "text_color": "#c63939",
+            "desktop_image": "shopify://shop_images/f3.webp",
+            "mobile_image": "shopify://shop_images/f3.webp",
+            "url_1": "shopify://pages/recent-view",
+            "btn_1_text": "了解更多",
+            "url_2": "shopify://products/small-naomi",
+            "btn_2_text": "立即购买"
+          }
+        },
+        "slider_RDMRnP": {
+          "type": "slider",
+          "settings": {
+            "title_1": "掌上Vlog无人机",
+            "title_2": "DJ NEO",
+            "title_3": "放手去飞",
+            "text_color": "#9f37d7",
+            "desktop_image": "shopify://shop_images/f4.webp",
+            "mobile_image": "shopify://shop_images/f4.webp",
+            "url_1": "shopify://pages/loyalty-program",
+            "btn_1_text": "了解更多",
+            "url_2": "shopify://products/selling-plans-ski-wax",
+            "btn_2_text": "立即购买"
+          }
+        }
+      },
+      "block_order": [
+        "slider_HCiT38",
+        "slider_ypMR3t",
+        "slider_jkfErB",
+        "slider_RDMRnP"
+      ],
+      "disabled": true,
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "bg_color_md": "rgba(0,0,0,0)",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "q_dj_five_image_text_DKNLUk": {
+      "type": "ql-dj-five-image-text",
+      "blocks": {
+        "slider_Y8DTLB": {
+          "type": "slider",
+          "settings": {
+            "title": "玉米中后期打不打药？打药后每亩增产 174 斤",
+            "content": "为验证玉米中后期通过飞防植保实现防病防虫、增产增收的效果，大疆农业联合安道麦在黑龙江肇东市选取了两块大小分别为 15 亩的玉米田进行对比。",
+            "text_color": "#121212",
+            "background": "#f7f9fa",
+            "url": "shopify://pages/dj",
+            "footer_text": ""
+          }
+        },
+        "slider_d7CFEa": {
+          "type": "slider",
+          "settings": {
+            "title": "",
+            "content": "",
+            "text_color": "#ffffff",
+            "background": "#f7f9fa",
+            "desktop_image": "shopify://shop_images/dj1.jpg",
+            "url": "shopify://pages/store-locator",
+            "footer_text": ""
+          }
+        },
+        "slider_pVGPnN": {
+          "type": "slider",
+          "settings": {
+            "title": "",
+            "content": "",
+            "text_color": "#121212",
+            "background": "#f7f9fa",
+            "desktop_image": "shopify://shop_images/dj2.jpg",
+            "url": "shopify://pages/reviews",
+            "footer_text": "创新与低碳并进，大疆农业发布《农业无人机行业白皮书（2023）》"
+          }
+        },
+        "slider_h69J6k": {
+          "type": "slider",
+          "settings": {
+            "title": "",
+            "content": "",
+            "text_color": "#121212",
+            "background": "#f7f9fa",
+            "desktop_image": "shopify://shop_images/dj3.jpg",
+            "url": "",
+            "footer_text": "大疆农业发布全球首支品牌片，《让农业更轻松，让生命更美好》"
+          }
+        },
+        "slider_e7RwUG": {
+          "type": "slider",
+          "settings": {
+            "title": "",
+            "content": "",
+            "text_color": "#121212",
+            "background": "#f7f9fa",
+            "desktop_image": "shopify://shop_images/dj24jpg.jpg",
+            "url": "shopify://pages/loyalty-program",
+            "footer_text": "大疆农业无人机玉米中后期管理，每亩增产 10% 以上"
+          }
+        }
+      },
+      "block_order": [
+        "slider_Y8DTLB",
+        "slider_d7CFEa",
+        "slider_pVGPnN",
+        "slider_h69J6k",
+        "slider_e7RwUG"
+      ],
+      "settings": {
+        "title": "",
+        "line_color": "#ffffff",
+        "bg_color": "rgba(0,0,0,0)",
+        "bg_color_md": "rgba(0,0,0,0)",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "ql_snow_GjWjdX": {
+      "type": "ql-snow",
+      "custom_css": [],
+      "settings": {
+        "img": "shopify://shop_images/snow.webp",
+        "amount": 50
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ql_swiper_4_dj_slidershow_Yd8zKK",
+    "q_dj_four_image_text_D4hkFw",
+    "q_dj_five_image_text_DKNLUk",
+    "ql_snow_GjWjdX"
+  ]
+}

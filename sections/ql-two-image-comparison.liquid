@@ -1,0 +1,478 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_md }}px;
+    padding-bottom: {{ section.settings.padding_bottom_md }}px;
+    background: {{ section.settings.bg_color_md }}
+  }
+  @media (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  .imgc-title {
+    font-size: 48px;
+    margin-top: 0;
+    margin-bottom: 48px;
+    font-weight: 700;
+  }
+  .section-{{ section.id }} .imgc-wrap {
+    width: 100%;
+    position: relative;
+    padding-top: {{ section.settings.height }}%;
+    user-select: none;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .imgc-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .imgc-box1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    clip-path: inset(0px 0px 0px 50%);
+    z-index: 2;
+  }
+  .imgc-box-animation {
+    animation: clipanimation .8s linear;
+  }
+  @keyframes clipanimation {
+    0% {
+      clip-path: inset(0px 0px 0px 50%);
+    }
+    25% {
+      clip-path: inset(0px 0px 0px 60%);
+    }
+    50% {
+      clip-path: inset(0px 0px 0px 50%);
+    }
+    75% {
+      clip-path: inset(0px 0px 0px 40%);
+    }
+    100% {
+      clip-path: inset(0px 0px 0px 50%);
+    }
+  }
+  .imgc-box-main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .imgc-box-main-content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 20px;
+    color: inherit;
+    z-index: 1;
+    color: var(--text_color);
+  }
+  .imgc-box-main-content-right {
+    right: 0;
+    left: auto;
+    text-align: right;
+  }
+  .imgc-box-main-content-title {
+    margin: 0;
+    color: inherit;
+    font-size: 40px;
+    font-weight: bold;
+  }
+  .imgc-box-main-content-content {
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+  }
+  .imgc-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .imgc-btn-wrap {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(-50%);
+    cursor: row-resize;
+  }
+  .imgc-btn-animation {
+    animation: btnanimation .8s linear;
+  }
+  @keyframes btnanimation {
+    0% {
+      left: 50%;
+    }
+    25% {
+      left: 60%;
+    }
+    50% {
+      left: 50%;
+    }
+    75% {
+      left: 40%;
+    }
+    100% {
+      left: 50%;
+    }
+  }
+  .imgc-btn-wrap::after,.imgc-btn-wrap::before {
+    content: '';
+    width: 4px;
+    flex: 1;
+    background: #FFF;
+  }
+  .imgc-btn {
+    width: 38px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFF;
+    border-radius: 20px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .imgc-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .section-{{ section.id }} .imgc-wrap {
+      padding-top: {{ section.settings.height_md }}%;
+    }
+    .imgc-box-main-content {
+      padding: 10px;
+    }
+    .imgc-box-main-content-title {
+      font-size: 18px;
+    }
+    .imgc-box-main-content-content {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <ql-two-image-comparison section-id="{{ section.id }}">
+    {% if section.settings.title != blank %}
+      <div class="page-width">
+        <h2 class="imgc-title">{{section.settings.title}}</h2>
+      </div>
+    {% endif %}
+    <div class="page-width">
+      <div class="imgc-wrap">
+        <div class="imgc-box">
+          <div class="imgc-box-main">
+            {% assign img = section.settings.img1 %}
+            {% if img != blank %}
+              {{
+                img
+                | image_url: width: 2560
+                | image_tag:
+                  loading: 'lazy',
+                  alt: img.alt,
+                  class: "imgc-img pc-show"
+              }}
+            {% endif %}
+            {% assign img_md = section.settings.img1_md | default: img %}
+            {% if img_md != blank %}
+              {{ 
+                img_md
+                | image_url: width:1200
+                | image_tag: 
+                  loading: 'lazy',
+                  alt: img_md.alt,
+                  class: 'imgc-img mobile-show'
+              }}
+            {% endif %}
+            <div class="imgc-box-main-content" style="--text_color: {{ section.settings.text_color1 }};">
+              <h1 class="imgc-box-main-content-title">{{ section.settings.img_title1 | newline_to_br }}</h1>
+              <p class="imgc-box-main-content-content">{{ section.settings.img_content1 | newline_to_br }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="imgc-box1">
+          <div class="imgc-box-main">
+            {% assign img = section.settings.img2 %}
+            {% if img != blank %}
+              {{
+                img
+                | image_url: width: 2560
+                | image_tag:
+                  loading: 'lazy',
+                  alt: img.alt,
+                  class: "imgc-img pc-show"
+              }}
+            {% endif %}
+            {% assign img_md = section.settings.img2_md | default: img %}
+            {% if img_md != blank %}
+              {{ 
+                img_md
+                | image_url: width:1200
+                | image_tag: 
+                  loading: 'lazy',
+                  alt: img_md.alt,
+                  class: 'imgc-img mobile-show'
+              }}
+            {% endif %}
+            <div class="imgc-box-main-content imgc-box-main-content-right" style="--text_color: {{ section.settings.text_color2 }};">
+              <h1 class="imgc-box-main-content-title">{{ section.settings.img_title2 | newline_to_br }}</h1>
+              <p class="imgc-box-main-content-content">{{ section.settings.img_content2 | newline_to_br }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="imgc-btn-wrap">
+          <div class="imgc-btn">
+            <svg t="1738752819917" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5627" width="18" height="18"><path d="M896 1005.738667c0 10.069333-9.898667 18.261333-22.186667 18.261333h-66.56c-12.288 0-22.186667-8.192-22.186666-18.261333V18.261333C785.066667 8.192 794.965333 0 807.253333 0h66.56c12.288 0 22.186667 8.192 22.186667 18.261333v987.477334z m-349.866667 0c0 10.069333-9.898667 18.261333-22.186666 18.261333h-66.56c-12.288 0-22.186667-8.192-22.186667-18.261333V18.261333C435.2 8.192 445.098667 0 457.386667 0h66.56c12.288 0 22.186667 8.192 22.186666 18.261333v987.477334z m-349.866666 0c0 10.069333-9.898667 18.261333-22.186667 18.261333H107.52c-12.288 0-22.186667-8.192-22.186667-18.261333V18.261333C85.333333 8.192 95.232 0 107.52 0h66.56c12.288 0 22.186667 8.192 22.186667 18.261333v987.477334z" fill="#040C2C" p-id="5628"></path></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ql-two-image-comparison>
+</section>
+
+{% javascript %}
+class QlTwoImageComparison extends HTMLElement {
+  constructor() {
+    super();
+    this.init()
+  }
+  init () {
+    let imgcWrap = this.querySelector('.imgc-wrap')
+    let imgcBox1 = this.querySelector('.imgc-box1')
+    let imgcBtnWrap = this.querySelector('.imgc-btn-wrap')
+    let imgcBtn = this.querySelector('.imgc-btn')
+
+    imgcBtnWrap.addEventListener('mousedown', (e) => {
+      let startX = e.clientX;
+      let startLeft = imgcBtnWrap.offsetLeft;
+
+      function onMouseMove(e) {
+        let newLeft = startLeft + e.clientX - startX;
+        if (newLeft < 0) newLeft = 0;
+        if (newLeft > imgcWrap.clientWidth) newLeft = imgcWrap.clientWidth;
+        let percent = newLeft / imgcWrap.clientWidth * 100
+        if (percent < 3) percent = 3;
+        if (percent > 97) percent = 97;
+        imgcBtnWrap.style.left = `${percent}%`;
+        imgcBox1.style.clipPath = `inset(0px 0px 0px ${percent}%)`;
+      }
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', () => {
+        document.removeEventListener('mousemove', onMouseMove);
+      }, { once: true });
+    });
+
+    imgcBtnWrap.addEventListener('touchstart', (e) => {
+      e = e.touches[0]
+      let startX = e.clientX;
+      let startLeft = imgcBtnWrap.offsetLeft;
+
+      function onMouseMove(e) {
+      e = e.touches[0]
+        
+        // console.log('touchmove',e, e.clientX, startX)
+        let newLeft = startLeft + e.clientX - startX;
+        if (newLeft < 0) newLeft = 0;
+        if (newLeft > imgcWrap.clientWidth) newLeft = imgcWrap.clientWidth;
+        let percent = newLeft / imgcWrap.clientWidth * 100
+        if (percent < 3) percent = 3;
+        if (percent > 97) percent = 97;
+        imgcBtnWrap.style.left = `${percent}%`;
+        imgcBox1.style.clipPath = `inset(0px 0px 0px ${percent}%)`;
+      }
+      document.addEventListener('touchmove', onMouseMove);
+      document.addEventListener('touchend', () => {
+        document.removeEventListener('touchmove', onMouseMove);
+      }, { once: true });
+    });
+
+    let observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          imgcBox1.classList.add('imgc-box-animation');
+          imgcBtnWrap.classList.add('imgc-btn-animation');
+          observer.unobserve(imgcWrap);
+        }
+      });
+    }, { threshold: 0.1 });
+    observer.observe(imgcWrap);
+  }
+}
+if (!customElements.get('ql-two-image-comparison')) {
+  customElements.define('ql-two-image-comparison', QlTwoImageComparison);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Two Image Comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Desktop Height",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "height_md",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile Height",
+      "default": 100
+    },
+    {
+      "type": "image_picker",
+      "id": "img1",
+      "label": "Desktop Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "img1_md",
+      "label": "Mobile Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "img2",
+      "label": "Desktop Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "img2_md",
+      "label": "Mobile Image 2"
+    },
+    {
+      "type": "textarea",
+      "id": "img_title1",
+      "label": "Image Title 1"
+    },
+    {
+      "type": "textarea",
+      "id": "img_content1",
+      "label": "Image Content 1"
+    },
+    {
+      "type": "color",
+      "id": "text_color1",
+      "label": "Text Color 1",
+      "default": "#ffffff"
+    },
+    {
+      "type": "textarea",
+      "id": "img_title2",
+      "label": "Image Title 2"
+    },
+    {
+      "type": "textarea",
+      "id": "img_content2",
+      "label": "Image Content 2"
+    },
+    {
+      "type": "color",
+      "id": "text_color2",
+      "label": "Text Color 2",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_top_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_md",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two Image Comparison"
+    }
+  ]
+}
+{% endschema %}

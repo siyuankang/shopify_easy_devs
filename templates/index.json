@@ -1,0 +1,948 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+  "sections": {
+    "ql_two_image_comparison_xYeCHU": {
+      "type": "ql-two-image-comparison",
+      "settings": {
+        "title": "Vibrant Headphone Choices",
+        "height": 50,
+        "height_md": 100,
+        "img1": "shopify://shop_images/timg1.webp",
+        "img2": "shopify://shop_images/timg2.webp",
+        "img_title1": "Gold Tone",
+        "img_content1": "Flow Harmony",
+        "text_color1": "#ffffff",
+        "img_title2": "Crimson Shadow",
+        "img_content2": "Flow Harmony",
+        "text_color2": "#ffffff",
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_top_md": 36,
+        "padding_bottom_md": 36
+      }
+    },
+    "ql_product_with_metafields_EwWYYF": {
+      "type": "ql-product-with-metafields",
+      "blocks": {
+        "item_P9cCJB": {
+          "type": "item",
+          "settings": {
+            "product1": "the-multi-managed-snowboard",
+            "parameter_comparison_name": "Product Title",
+            "parameter_comparison_description": "Some descriptive texts",
+            "parameter_comparison_image1": "shopify://shop_images/c1.svg",
+            "parameter_comparison_text1": "Screen Size:16.1 inch",
+            "parameter_comparison_image2": "shopify://shop_images/c2.svg",
+            "parameter_comparison_text2": "Resolation：1920*1080 (FHD)",
+            "parameter_comparison_image3": "shopify://shop_images/c3.svg",
+            "parameter_comparison_text3": "Refresh Rate Base",
+            "parameter_comparison_image4": "shopify://shop_images/c4.svg",
+            "parameter_comparison_text4": "Recommend ForGaming, Video, Travel"
+          }
+        },
+        "item_CcYXXM": {
+          "type": "item",
+          "settings": {
+            "product1": "the-multi-location-snowboard",
+            "parameter_comparison_name": "Product Title",
+            "parameter_comparison_description": "Some descriptive texts",
+            "parameter_comparison_image1": "shopify://shop_images/c1.svg",
+            "parameter_comparison_text1": "Screen Size:16.1 inch",
+            "parameter_comparison_image2": "shopify://shop_images/c2.svg",
+            "parameter_comparison_text2": "Resolation：1920*1080 (FHD)",
+            "parameter_comparison_image3": "shopify://shop_images/c3.svg",
+            "parameter_comparison_text3": "Refresh Rate Base",
+            "parameter_comparison_image4": "shopify://shop_images/c4.svg",
+            "parameter_comparison_text4": "Recommend ForGaming, Video, Travel"
+          }
+        },
+        "item_qjQKbK": {
+          "type": "item",
+          "settings": {
+            "product1": "the-complete-snowboard",
+            "parameter_comparison_name": "Product Title",
+            "parameter_comparison_description": "Some descriptive texts",
+            "parameter_comparison_image1": "shopify://shop_images/c1.svg",
+            "parameter_comparison_text1": "Screen Size:16.1 inch",
+            "parameter_comparison_image2": "shopify://shop_images/c2.svg",
+            "parameter_comparison_text2": "Resolation：1920*1080 (FHD)",
+            "parameter_comparison_image3": "shopify://shop_images/c3.svg",
+            "parameter_comparison_text3": "Refresh Rate Base",
+            "parameter_comparison_image4": "shopify://shop_images/c4.svg",
+            "parameter_comparison_text4": "Recommend ForGaming, Video, Travel"
+          }
+        },
+        "item_CKUjqY": {
+          "type": "item",
+          "settings": {
+            "product1": "the-out-of-stock-snowboard",
+            "parameter_comparison_name": "Product Title",
+            "parameter_comparison_description": "Some descriptive texts",
+            "parameter_comparison_image1": "shopify://shop_images/c1.svg",
+            "parameter_comparison_text1": "Screen Size:16.1 inch",
+            "parameter_comparison_image2": "shopify://shop_images/c2.svg",
+            "parameter_comparison_text2": "Resolation：1920*1080 (FHD)",
+            "parameter_comparison_image3": "shopify://shop_images/c3.svg",
+            "parameter_comparison_text3": "Refresh Rate Base",
+            "parameter_comparison_image4": "shopify://shop_images/c4.svg",
+            "parameter_comparison_text4": "Recommend ForGaming, Video, Travel"
+          }
+        }
+      },
+      "block_order": [
+        "item_P9cCJB",
+        "item_CcYXXM",
+        "item_qjQKbK",
+        "item_CKUjqY"
+      ],
+      "settings": {
+        "title": "Comparison of Every Product Series",
+        "btn_bg_color": "#000000",
+        "btn_text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 236,
+        "padding_bottom": 0
+      }
+    },
+    "ql_press_U9yPfQ": {
+      "type": "ql-press",
+      "settings": {
+        "title": "This is a title",
+        "line_color": "#1f1f1f",
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 72,
+        "padding_top_md": 52,
+        "padding_bottom_md": 80,
+        "image1": "shopify://shop_images/2.webp",
+        "title1": "\"In our tests, the KINGABC was about as color-accurate as other monitors that cost three as much.\"",
+        "image2": "shopify://shop_images/4.webp",
+        "title2": "\"The Z1FC delivers the boost in motion clarity that gamers expect of a 144Hz display, and it’s a night-and-day improvement over a 60Hz alternative.\"",
+        "image3": "shopify://shop_images/1.webp",
+        "title3": "\"Those looking for improved motion fluidity and clarity will see better results from less expensive portable gaming monitors.\"",
+        "image4": "shopify://shop_images/wh2.svg",
+        "title4": "\"In our tests, the KINGABC was about as color-accurate as other monitors that cost three as much.\"",
+        "image5": "shopify://shop_images/wh1.svg",
+        "title5": "\"In our tests, the KINGABC was about as color-accurate as other monitors that cost three as much.\"",
+        "title6": "\"In our tests, the KINGABC was about as color-accurate as other monitors that cost three as much.\"",
+        "title7": "\"In our tests, the KINGABC was about as color-accurate as other monitors that cost three as much.\""
+      }
+    },
+    "ql_accordion_big_images_9NwBUb": {
+      "type": "ql-accordion-big-images-v1",
+      "blocks": {
+        "item_PEgryQ": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "THE WORLD'S MOBILE \nCHARGING BRAND*",
+            "content": "EXPLORE OUR TOP PRODUCTS BY CATEGORY",
+            "desktop_image": "shopify://shop_images/green-plants-grow-in-lines-on-rolling-hills.jpg",
+            "mobile_image": "shopify://shop_images/green-plants-grow-in-lines-on-rolling-hills.jpg",
+            "btn": "Learn More",
+            "url": ""
+          }
+        },
+        "item_N398jx": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "111",
+            "content": "222",
+            "desktop_image": "shopify://shop_images/person-carries-a-wooden-box-full-of-dough-balls.jpg",
+            "mobile_image": "shopify://shop_images/person-carries-a-wooden-box-full-of-dough-balls.jpg",
+            "btn": "Learn More",
+            "url": ""
+          }
+        },
+        "item_zcNCyC": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "desktop_image": "shopify://shop_images/flatlay-of-jade-face-roller-laying-on-a-grey-stone.jpg",
+            "mobile_image": "shopify://shop_images/flatlay-of-jade-face-roller-laying-on-a-grey-stone.jpg",
+            "btn": "Learn More",
+            "url": ""
+          }
+        },
+        "item_9MFejm": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "desktop_image": "shopify://shop_images/a-bridge-sitting-in-thick-pink-and-purple-fog.jpg",
+            "mobile_image": "shopify://shop_images/a-bridge-sitting-in-thick-pink-and-purple-fog.jpg",
+            "btn": "Learn More",
+            "url": ""
+          }
+        },
+        "item_9V4M6E": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "desktop_image": "shopify://shop_images/dj3.webp",
+            "btn": "Learn More",
+            "url": ""
+          }
+        },
+        "item_P6a7pi": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "desktop_image": "shopify://shop_images/pc_index_pic.webp",
+            "btn": "Learn More",
+            "url": ""
+          }
+        },
+        "item_3wrngb": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "desktop_image": "shopify://shop_images/dj4.jpg",
+            "btn": "Learn More",
+            "url": ""
+          }
+        },
+        "item_EhEfAR": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "desktop_image": "shopify://shop_images/dj2.jpg",
+            "btn": "Learn More",
+            "url": ""
+          }
+        },
+        "item_nQ8tnQ": {
+          "type": "item",
+          "settings": {
+            "position": "middle",
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "desktop_image": "shopify://shop_images/f4.webp",
+            "btn": "Learn More",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_PEgryQ",
+        "item_N398jx",
+        "item_zcNCyC",
+        "item_9MFejm",
+        "item_9V4M6E",
+        "item_P6a7pi",
+        "item_3wrngb",
+        "item_EhEfAR",
+        "item_nQ8tnQ"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_screen": true,
+        "desktop_height": 650,
+        "mobile_height": 400,
+        "title": "",
+        "content": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_top_md": 36,
+        "padding_bottom_md": 36,
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "button_bg_color": "#33aab4",
+        "button_text_color": "#ffffff",
+        "button_hover_bg_color": "#ffffff",
+        "button_hover_text_color": "#000000"
+      }
+    },
+    "ql_swiper_6_G97eBA": {
+      "type": "ql-swiper-6",
+      "blocks": {
+        "item_zKQVKw": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/green-plants-grow-in-lines-on-rolling-hills.jpg",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Enjoy the exotic of sunny Hawaii",
+            "content": "Maui, Hawaii"
+          }
+        },
+        "item_GyGV3K": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dj4.jpg",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Enjoy the exotic of sunny Hawaii",
+            "content": "Maui, Hawaii"
+          }
+        },
+        "item_a88x8H": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dj5.jpg",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Enjoy the exotic of sunny Hawaii",
+            "content": "Maui, Hawaii"
+          }
+        },
+        "item_LdgBUi": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/flatlay-of-jade-face-roller-laying-on-a-grey-stone.jpg",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Enjoy the exotic of sunny Hawaii",
+            "content": "Maui, Hawaii"
+          }
+        },
+        "item_9X96KM": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/a-bridge-sitting-in-thick-pink-and-purple-fog.jpg",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Awesome Eiffel Tower",
+            "content": ""
+          }
+        },
+        "item_Uj89d7": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dj2.jpg",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Awesome Eiffel Tower",
+            "content": ""
+          }
+        },
+        "item_8jrqJj": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Main_b13ad453-477c-4ed1-9b43-81f3345adfd6.jpg",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Awesome Eiffel Tower",
+            "content": ""
+          }
+        },
+        "item_jNzcUB": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/flatlay-of-jade-face-roller-laying-on-a-grey-stone.jpg",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Awesome Eiffel Tower",
+            "content": ""
+          }
+        },
+        "item_4tVRB3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/zebra4_750x_cbe71bb4-4551-4d11-bd31-55c3c9cdcddd.webp",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Awesome Eiffel Tower",
+            "content": ""
+          }
+        },
+        "item_a6NiJK": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/AGO_X-m-transformed.webp",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Awesome Eiffel Tower",
+            "content": ""
+          }
+        },
+        "item_V3GLjG": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/zebra4_750x_cbe71bb4-4551-4d11-bd31-55c3c9cdcddd.webp",
+            "tag": "domestic",
+            "tag_bg_color": "#1b7402",
+            "title": "Awesome Eiffel Tower",
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_zKQVKw",
+        "item_GyGV3K",
+        "item_a88x8H",
+        "item_LdgBUi",
+        "item_9X96KM",
+        "item_Uj89d7",
+        "item_8jrqJj",
+        "item_jNzcUB",
+        "item_4tVRB3",
+        "item_a6NiJK",
+        "item_V3GLjG"
+      ],
+      "settings": {
+        "title": "This is a title",
+        "collection": "",
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 40,
+        "padding_top_md": 36,
+        "padding_bottom_md": 36
+      }
+    },
+    "ql_video_slider_6rbDUp": {
+      "type": "ql-video-slider",
+      "blocks": {
+        "item_czNf9K": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/demo.mp4",
+            "image": "shopify://shop_images/dj5.jpg",
+            "content": "Solar Power to Secure a Brighter Future"
+          }
+        },
+        "item_deYeiW": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/green-plants-grow-in-lines-on-rolling-hills.jpg",
+            "content": "Solar Power to Secure a Brighter Future"
+          }
+        },
+        "item_G68DgN": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dj2.jpg",
+            "content": "Solar Power to Secure a Brighter Future"
+          }
+        },
+        "item_ayQVVR": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/BF1.webp",
+            "content": ""
+          }
+        },
+        "item_T7eQt6": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/a-bridge-sitting-in-thick-pink-and-purple-fog.jpg",
+            "content": ""
+          }
+        },
+        "item_4dfQbw": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dj2.webp",
+            "content": ""
+          }
+        },
+        "item_fnkEy6": {
+          "type": "item",
+          "settings": {
+            "content": ""
+          }
+        },
+        "item_ARVFmq": {
+          "type": "item",
+          "settings": {
+            "content": ""
+          }
+        },
+        "item_Tr6Uwm": {
+          "type": "item",
+          "settings": {
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_czNf9K",
+        "item_deYeiW",
+        "item_G68DgN",
+        "item_ayQVVR",
+        "item_T7eQt6",
+        "item_4dfQbw",
+        "item_fnkEy6",
+        "item_ARVFmq",
+        "item_Tr6Uwm"
+      ],
+      "settings": {
+        "title": "视频模块",
+        "collection": "",
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 300,
+        "padding_top_md": 36,
+        "padding_bottom_md": 36
+      }
+    },
+    "ql_hot_spots_JYaQXK": {
+      "type": "ql-hot-spots",
+      "blocks": {
+        "item_y3B3M4": {
+          "type": "item",
+          "settings": {
+            "title": "This is a title1",
+            "content": "This is a contents This is a contents This is a contents This is a contents This is a contents",
+            "direction": "right",
+            "horizontal_position": 32,
+            "vertical_position": 43,
+            "horizontal_position_mobile": 14,
+            "vertical_position_mobile": 56
+          }
+        },
+        "item_3FRwxJ": {
+          "type": "item",
+          "settings": {
+            "title": "This is a title2",
+            "content": "This is a contents This is a contents This is a contents This is a contents This is a contents",
+            "direction": "right",
+            "horizontal_position": 47,
+            "vertical_position": 30,
+            "horizontal_position_mobile": 43,
+            "vertical_position_mobile": 40
+          }
+        },
+        "item_wT96Kg": {
+          "type": "item",
+          "settings": {
+            "title": "This is a title3",
+            "content": "This is a contents This is a contents This is a contents This is a contents This is a contents",
+            "direction": "left",
+            "horizontal_position": 67,
+            "vertical_position": 73,
+            "horizontal_position_mobile": 70,
+            "vertical_position_mobile": 59
+          }
+        }
+      },
+      "block_order": [
+        "item_y3B3M4",
+        "item_3FRwxJ",
+        "item_wT96Kg"
+      ],
+      "settings": {
+        "title": "DJ Air pro",
+        "content": "Something description",
+        "text_color": "#ffffff",
+        "text_color_md": "#000000",
+        "image": "shopify://shop_images/b976c6de4bb48ffe42cbb0fc75cd91ad.jpg",
+        "mobile_image": "shopify://shop_images/dj2.webp",
+        "bg_color": "#f5f5f7",
+        "bg_color_md": "#f5f5f7",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_md": 32,
+        "padding_bottom_md": 32
+      }
+    },
+    "ql_gsap3_TFPj6L": {
+      "type": "ql-gsap3",
+      "blocks": {
+        "item_hrkzgz": {
+          "type": "item",
+          "settings": {
+            "title": "Sound of Silence",
+            "subtitle1": "",
+            "subtitle2": "",
+            "content": "Atrue friend is some one who reaches for your hand and touches your heart."
+          }
+        },
+        "item_Ni34bW": {
+          "type": "item",
+          "settings": {
+            "title": "Sound of Silence",
+            "subtitle1": "",
+            "subtitle2": "",
+            "content": "Atrue friend is some one who reaches for your hand and touches your heart."
+          }
+        },
+        "item_nUj7rz": {
+          "type": "item",
+          "settings": {
+            "title": "Sound of Silence",
+            "subtitle1": "",
+            "subtitle2": "",
+            "content": "Atrue friend is some one who reaches for your hand and touches your heart."
+          }
+        }
+      },
+      "block_order": [
+        "item_hrkzgz",
+        "item_Ni34bW",
+        "item_nUj7rz"
+      ],
+      "disabled": true,
+      "settings": {
+        "id": "",
+        "img": "shopify://shop_images/sd1.webp",
+        "img_md": "shopify://shop_images/sd1.webp",
+        "logo": "shopify://shop_images/default.svg",
+        "opacity": 50,
+        "speed": 10,
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_md": 0,
+        "padding_bottom_md": 0
+      }
+    },
+    "ql_infinite_scrolling_banner_XMQmxq": {
+      "type": "ql-Infinite-scrolling-banner",
+      "blocks": {
+        "item_LNcBgq": {
+          "type": "item",
+          "settings": {
+            "content": "店铺优化开发，专业技术解答，解决你的疑问。联系我们，获取更多帮助！想加入交流群的同学，评论“加群”即可！"
+          }
+        },
+        "item_Hk9wDW": {
+          "type": "item",
+          "settings": {
+            "content": "店铺优化开发，专业技术解答，解决你的疑问。联系我们，获取更多帮助！想加入交流群的同学，评论“加群”即可！"
+          }
+        },
+        "item_xT46mN": {
+          "type": "item",
+          "settings": {
+            "content": "店铺优化开发，专业技术解答，解决你的疑问。联系我们，获取更多帮助！想加入交流群的同学，评论“加群”即可！"
+          }
+        }
+      },
+      "block_order": [
+        "item_LNcBgq",
+        "item_Hk9wDW",
+        "item_xT46mN"
+      ],
+      "settings": {
+        "direction": "left",
+        "font_size": 18,
+        "speed": 11,
+        "banner_height": 80,
+        "banner_bg_color": "#ffe86c",
+        "text_color": "#751d1d",
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 100,
+        "padding_bottom": 36
+      }
+    },
+    "ql_gsap_3_tjVKqM": {
+      "type": "ql-gsap-3",
+      "settings": {
+        "title": "Something Display",
+        "text_color": "#ffffff",
+        "font_size": 80,
+        "font_size_md": 40,
+        "text_stroke": 2,
+        "text_stroke_color": "#000000",
+        "image_ratio": 75,
+        "image_ratio_md": 100,
+        "img": "shopify://shop_images/dj3.webp",
+        "bg_color": "#f5f5f7",
+        "bg_color_md": "#f5f5f7",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_md": 0,
+        "padding_bottom_md": 0
+      }
+    },
+    "ql_gsap_3_YWX8Aw": {
+      "type": "ql-gsap-3",
+      "settings": {
+        "title": "Something Display",
+        "text_color": "#ffffff",
+        "font_size": 80,
+        "font_size_md": 40,
+        "text_stroke": 2,
+        "text_stroke_color": "#000000",
+        "image_ratio": 75,
+        "image_ratio_md": 100,
+        "img": "shopify://shop_images/dj24jpg.jpg",
+        "bg_color": "#f5f5f7",
+        "bg_color_md": "#f5f5f7",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_md": 0,
+        "padding_bottom_md": 0
+      }
+    },
+    "ql_gsap_2_jyd7Yh": {
+      "type": "ql-gsap-2",
+      "blocks": {
+        "item_MfNrAq": {
+          "type": "item",
+          "settings": {
+            "img": "shopify://shop_images/dj2.jpg",
+            "title": "Sound of Silence",
+            "content": "Atrue friend is some one who reaches for your hand and touches your heart.",
+            "url": ""
+          }
+        },
+        "item_wPELy8": {
+          "type": "item",
+          "settings": {
+            "title": "",
+            "content": "",
+            "url": ""
+          }
+        },
+        "item_r9Lr6N": {
+          "type": "item",
+          "settings": {
+            "title": "",
+            "content": "",
+            "url": ""
+          }
+        },
+        "item_t9TwfT": {
+          "type": "item",
+          "settings": {
+            "img": "shopify://shop_images/dj4.jpg",
+            "title": "Sound of Silence",
+            "content": "Atrue friend is some one who reaches for your hand and touches your heart.",
+            "url": "shopify://pages/compare-models"
+          }
+        },
+        "item_r9zX38": {
+          "type": "item",
+          "settings": {
+            "img": "shopify://shop_images/woman-holding-coffee-mug.jpg",
+            "title": "Sound of Silence",
+            "content": "Atrue friend is some one who reaches for your hand and touches your heart.",
+            "url": ""
+          }
+        },
+        "item_j8Urdh": {
+          "type": "item",
+          "settings": {
+            "img": "shopify://shop_images/notebook.png",
+            "title": "Sound of Silence",
+            "content": "Atrue friend is some one who reaches for your hand and touches your heart.",
+            "url": ""
+          }
+        },
+        "item_qaAyBr": {
+          "type": "item",
+          "settings": {
+            "img": "shopify://shop_images/sd1.webp",
+            "title": "Sound of Silence",
+            "content": "Atrue friend is some one who reaches for your hand and touches your heart.",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_MfNrAq",
+        "item_wPELy8",
+        "item_r9Lr6N",
+        "item_t9TwfT",
+        "item_r9zX38",
+        "item_j8Urdh",
+        "item_qaAyBr"
+      ],
+      "settings": {
+        "title": "Our products display",
+        "main_bg_color": "#d9d1c1",
+        "speed": 10,
+        "bg_color": "#f5f5f5",
+        "bg_color_md": "#f5f5f5",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_md": 0,
+        "padding_bottom_md": 0
+      }
+    },
+    "ql_swiper_5_cube_iyrPkM": {
+      "type": "ql-swiper-5-cube",
+      "blocks": {
+        "item_Nz4xeY": {
+          "type": "item",
+          "settings": {
+            "title": "This is a title",
+            "content": "This is a content , This is a content , This is a content , This is a content , This is a content , This is a content ,",
+            "text_color": "#ffffff",
+            "desktop_image": "shopify://shop_images/a-bridge-sitting-in-thick-pink-and-purple-fog.jpg",
+            "url": ""
+          }
+        },
+        "item_tnwMwR": {
+          "type": "item",
+          "settings": {
+            "title": "",
+            "content": "",
+            "text_color": "#333333",
+            "desktop_image": "shopify://shop_images/flatlay-of-jade-face-roller-laying-on-a-grey-stone.jpg",
+            "url": ""
+          }
+        },
+        "item_MhCRnq": {
+          "type": "item",
+          "settings": {
+            "title": "",
+            "content": "",
+            "text_color": "#333333",
+            "desktop_image": "shopify://shop_images/woman-holding-coffee-mug.jpg",
+            "url": ""
+          }
+        },
+        "item_htFGRT": {
+          "type": "item",
+          "settings": {
+            "title": "",
+            "content": "",
+            "text_color": "#333333",
+            "desktop_image": "shopify://shop_images/person-carries-a-wooden-box-full-of-dough-balls.jpg",
+            "url": ""
+          }
+        },
+        "item_UDKbBa": {
+          "type": "item",
+          "settings": {
+            "title": "",
+            "content": "",
+            "text_color": "#333333",
+            "desktop_image": "shopify://shop_images/green-plants-grow-in-lines-on-rolling-hills.jpg",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_Nz4xeY",
+        "item_tnwMwR",
+        "item_MhCRnq",
+        "item_htFGRT",
+        "item_UDKbBa"
+      ],
+      "settings": {
+        "title": "立方体展示模块",
+        "collection": "",
+        "bg_color": "#ffffff",
+        "bg_color_md": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
+    },
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "desktop_content_position": "bottom-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "ql_two_image_comparison_xYeCHU",
+    "ql_product_with_metafields_EwWYYF",
+    "ql_press_U9yPfQ",
+    "ql_accordion_big_images_9NwBUb",
+    "ql_swiper_6_G97eBA",
+    "ql_video_slider_6rbDUp",
+    "ql_hot_spots_JYaQXK",
+    "ql_gsap3_TFPj6L",
+    "ql_infinite_scrolling_banner_XMQmxq",
+    "ql_gsap_3_tjVKqM",
+    "ql_gsap_3_YWX8Aw",
+    "ql_gsap_2_jyd7Yh",
+    "ql_swiper_5_cube_iyrPkM",
+    "image_banner",
+    "featured_collection"
+  ]
+}

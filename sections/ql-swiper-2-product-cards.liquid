@@ -1,0 +1,246 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background: {{ section.settings.bg_color }}
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .lsp1-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .lsp1-swiper {
+    width: 240px;
+    height: 320px;
+  }
+  .lsp1-swiper-slide {
+    border-radius: 10px;
+    overflow: hidden;
+    height:100%;
+    width:100%;
+    position: relative;
+    cursor: pointer;
+  }
+  .lsp1-slider-a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
+  .lsp1-item-main {
+    padding: 30px 30px;
+  }
+  .lsp1-item-main>h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: inherit;
+    margin: 0 0 25px;
+  }
+  .lsp1-item-main>p {
+    font-size: 16px;
+    margin: 0;
+  }
+  .lsp1-btn-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .lsp1-next,.lsp1-prev {
+    width: 56px;
+    height: 56px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: rgba(213, 213, 213, 0.6);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 20px;
+    cursor: pointer;
+  }
+  .lsp1-prev {
+    transform: rotate(180deg);
+  }
+  .lsp1-prev.swiper-button-disabled,.lsp1-next.swiper-button-disabled {
+    opacity: 0.5;
+    cursor: auto;
+  }
+  .lsp1-swiper-slide:nth-child(1n) {
+    background-color: rgb(206, 17, 17);
+  }
+
+  .lsp1-swiper-slide:nth-child(2n) {
+    background-color: rgb(0, 140, 255);
+  }
+
+  .lsp1-swiper-slide:nth-child(3n) {
+    background-color: rgb(10, 184, 111);
+  }
+
+  .lsp1-swiper-slide:nth-child(4n) {
+    background-color: rgb(211, 122, 7);
+  }
+
+  .lsp1-swiper-slide:nth-child(5n) {
+    background-color: rgb(118, 163, 12);
+  }
+
+  .lsp1-swiper-slide:nth-child(6n) {
+    background-color: rgb(180, 10, 47);
+  }
+
+  .lsp1-swiper-slide:nth-child(7n) {
+    background-color: rgb(35, 99, 19);
+  }
+
+  .lsp1-swiper-slide:nth-child(8n) {
+    background-color: rgb(0, 68, 255);
+  }
+
+  .lsp1-swiper-slide:nth-child(9n) {
+    background-color: rgb(218, 12, 218);
+  }
+
+  .lsp1-swiper-slide:nth-child(10n) {
+    background-color: rgb(54, 94, 77);
+  }
+
+  @media screen and (max-width: 1024px) {
+    .lsp1-title {
+      font-size: 20px;
+    }
+    .lsp1-swiper {
+      width: 75%;
+      height: 86vw;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <q-swiper-2-product-cards>
+    <div class="page-width">
+      {% if section.settings.title %}
+        <h2 class="lsp1-title">{{section.settings.title}}</h2>
+      {% endif %}
+      <div class="swiper lsp1-swiper">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide lsp1-swiper-slide" style="{% if block.settings.bg_color != blank %}background:{{ block.settings.bg_color }}{% endif %}">
+              <a class="lsp1-slider-a" href="{{ block.settings.url }}">
+                <div class="lsp1-item-main" style="color:{{ block.settings.text_color }}">
+                  <h3>{{block.settings.title}}</h3>
+                  <p>{{block.settings.content}}</p>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="lsp1-btn-wrap">
+        <div class="lsp1-prev">
+          <svg t="1731394647994" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3119" width="20" height="20"><path d="M348.311309 20.039939 210.069059 157.208186l359.489206 356.587089L210.069059 870.401824l138.24225 137.20717 497.809301-493.812503L348.311309 20.039939z" fill="#272635" p-id="3120"></path></svg>
+        </div>
+        <div class="lsp1-next">
+          <svg t="1731394647994" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3119" width="20" height="20"><path d="M348.311309 20.039939 210.069059 157.208186l359.489206 356.587089L210.069059 870.401824l138.24225 137.20717 497.809301-493.812503L348.311309 20.039939z" fill="#272635" p-id="3120"></path></svg>
+        </div>
+      </div>
+    </div>
+  </q-swiper-2-product-cards>
+</section>
+
+{% schema %}
+{
+  "name": "Swiper-2-product-cards",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Textt Color",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Swiper-2-product-cards"
+    }
+  ]
+}
+{% endschema %}

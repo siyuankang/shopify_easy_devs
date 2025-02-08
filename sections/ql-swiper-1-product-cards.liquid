@@ -1,0 +1,197 @@
+  <style>
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+      background: {{ section.settings.bg_color }}
+    }
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+        background: {{ section.settings.bg_color }}
+      }
+    }
+    .section-{{ section.id }} div:empty {
+      display: block;
+    }
+    .lsp-title {
+      font-size: 28px;
+      padding-left: 10rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .lsp-swiper {
+      padding: 15px 0;
+      padding-left: 10rem;
+      padding-right: 25px;
+    }
+    .lsp-swiper-slide {
+      border-radius: 10px;
+      overflow: hidden;
+      height: 500px;
+      width:480px;
+      position: relative;
+      transition: 0.3s;
+      cursor: pointer;
+      box-shadow: 0 0 5px #e5e5e5;
+    }
+    .lsp-slider-a {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: #333333;
+    }
+    .lsp-swiper-slide:hover {
+      box-shadow: 0 0 15px #e5e5e5;
+      transform: scale(1.04);
+    }
+    .full-img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      object-fit: cover;
+    }
+    .lsp-item-main {
+      position: absolute;
+      width: 100%;
+      left: 35px;
+      top: 50px;
+      z-index: 2;
+      width: 90%;
+    }
+    .lsp-item-main>h3 {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .lsp-item-main>p {
+      font-size: 17px;
+    }
+    .lsp-next,.lsp-prev {
+      width: 56px;
+      height: 56px;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+    }
+    .lsp-next::after,.lsp-prev::after {
+      color: #333;
+      font-size: 21px;
+      font-weight: bold;
+    }
+    @media screen and (max-width: 1024px) {
+      .lsp-swiper-slide {
+        height: 450px;
+        width: 310px;
+      }
+      .lsp-title {
+        font-size: 20px;
+        padding-left: 1rem;
+      }
+      .lsp-swiper {
+        padding: 15px 0;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+  </style>
+
+  <section class="section-{{ section.id }}">
+    <q-swiper-1-product-cards>
+      <div class="lsp-container">
+        {% if section.settings.title %}
+          <h2 class="lsp-title">{{section.settings.title}}</h2>
+        {% endif %}
+        <div class="swiper lsp-swiper">
+          <div class="swiper-wrapper">
+            {% assign products = section.settings.collection.products %}
+            {% for product in products %}
+              <div class="swiper-slide lsp-swiper-slide">
+                <a class="lsp-slider-a" href="{{ product.url }}">
+                  {% assign img = product.images[0] %}
+                  {% if img != blank %}
+                    {{ 
+                      img
+                      | image_url: width:img.width
+                      | image_tag: 
+                        loading: 'lazy',
+                        alt: img.alt,
+                        sizes: "100vw", 
+                        widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                        class: 'full-img'
+                    }}
+                  {% endif %}
+                  <div class="lsp-item-main">
+                    <h2>{{product.title}}</h2>
+                    <p>{{ product.price | money }}</p>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-button-next lsp-next"></div>
+          <div class="swiper-button-prev lsp-prev"></div>
+        </div>
+      </div>
+    </q-swiper-1-product-cards>
+  </section>
+
+  {% schema %}
+  {
+    "name": "Swiper-1-product-cards",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Desktop Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "bg_color_md",
+        "label": "Mobile Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 300,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 300,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      }
+    ],
+    "presets": [
+      {
+        "name": "Swiper-1-product-cards"
+      }
+    ]
+  }
+  {% endschema %}

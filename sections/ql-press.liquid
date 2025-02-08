@@ -1,0 +1,348 @@
+<style>
+  .qpre-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_md }}px;
+    padding-bottom: {{ section.settings.padding_bottom_md }}px;
+    background: {{ section.settings.bg_color_md }}
+  }
+  @media screen and (min-width: 750px) {
+      .qpre-section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+        background: {{ section.settings.bg_color }}
+      }
+  }
+  .qpre-title {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0 11px;
+  }
+  .qpre-ug-link .qpre-desc {
+      font-size: 24px;
+      color: #000000;
+      line-height: 1.2;
+      text-align: center;
+      margin: 0 auto;
+      min-height: 58px;
+  }
+  .qpre-ug-link .qpre-link-images {
+      margin-top: 50px;
+  }
+  .qpre-link-images {
+    text-wrap: nowrap;
+    text-align:center;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .qpre-link-images::-webkit-scrollbar {
+    display: none;
+  }
+  .qpre-link-image {
+    display: inline-block;
+  }
+  .qpre-ug-link .qpre-link-images .qpre-link-image {
+      width: auto;
+      height: 46px;
+      margin-right: 91px;
+      cursor: pointer;
+      position: relative;
+  }
+  .qpre-link-image::before {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: {{ section.settings.line_color }};
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    transition: .4s;
+  }
+  .qpre-link-image:last-child {
+      margin-right: 0 !important;
+  }
+  .qpre-link-image.active::before {
+      width: 100%;
+  }
+  .qpre-ug-link .qpre-link-images .qpre-link-image img {
+      width: 100%;
+      height: 90%;
+      object-fit: contain;
+  }
+  @media (max-width: 767px) {
+      .qpre-title {
+        font-size: 20px;
+        margin: 0 0 34px;
+      }
+      .qpre-ug-link .qpre-desc {
+          font-size: 14px;
+          line-height: 1.2;
+          width: 100%;
+          padding: 0 30px;
+      }
+      .qpre-ug-link .qpre-link-images {
+          margin-top: 40px;
+      }
+      .qpre-ug-link .qpre-link-images .qpre-link-image {
+          width: 100px;
+          height: 40px;
+          margin-right: 10px;
+          margin-left: 10px;
+      }
+  }
+</style>
+{%- liquid
+    assign sid = section.id
+    assign se_stts = section.settings
+-%}
+<section class="qpre-section-{{ section.id }} qpre-ug-link">
+  <div class="page-width">
+    <h2 class="qpre-title">{{ section.settings.title }}</h2>
+    <div class="qpre-desc">{{ section.settings.title1 }}</div>
+    <div class="qpre-link-images">
+      {%- if se_stts.image1 != blank -%}
+          <div class="qpre-link-image active">
+              <img src="{{ se_stts.image1 | image_url }}" alt="{{ se_stts.image1.alt | escape }}">
+          </div>{%- endif -%}
+      {%- if se_stts.image2 != blank -%}
+          <div class="qpre-link-image">
+              <img src="{{ se_stts.image2 | image_url }}" alt="{{ se_stts.image1.alt | escape }}">
+          </div>{%- endif -%}
+      {%- if se_stts.image3 != blank -%}
+          <div class="qpre-link-image">
+              <img src="{{ se_stts.image3 | image_url }}" alt="{{ se_stts.image1.alt | escape }}">
+          </div>{%- endif -%}
+      {%- if se_stts.image4 != blank -%}
+          <div class="qpre-link-image">
+              <img src="{{ se_stts.image4 | image_url }}" alt="{{ se_stts.image1.alt | escape }}">
+          </div>{%- endif -%}
+      {%- if se_stts.image5 != blank -%}
+          <div class="qpre-link-image">
+              <img src="{{ se_stts.image5 | image_url }}" alt="{{ se_stts.image1.alt | escape }}">
+          </div>{%- endif -%}
+      {%- if se_stts.image6 != blank -%}
+          <div class="qpre-link-image">
+              <img src="{{ se_stts.image6 | image_url }}" alt="{{ se_stts.image1.alt | escape }}">
+          </div>{%- endif -%}
+      {%- if se_stts.image7 != blank -%}
+          <div class="qpre-link-image">
+              <img src="{{ se_stts.image7 | image_url }}" alt="{{ se_stts.image1.alt | escape }}">
+          </div>{%- endif -%}
+    </div>
+  </div>
+</section>
+{%- liquid
+  assign text1 = section.settings.title1
+  assign text2 = section.settings.title2
+  assign text3 = section.settings.title3
+  assign text4 = section.settings.title4
+  assign text5 = section.settings.title5
+  assign text6 = section.settings.title6
+  assign text7 = section.settings.title7
+-%}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const textArray = [
+      {%- if se_stts.image1 != blank -%}'{{text1}}',{%- endif -%}
+      {%- if se_stts.image2 != blank -%}'{{text2}}',{%- endif -%}
+      {%- if se_stts.image3 != blank -%}'{{text3}}',{%- endif -%}
+      {%- if se_stts.image4 != blank -%}'{{text4}}',{%- endif -%}
+      {%- if se_stts.image5 != blank -%}'{{text5}}',{%- endif -%}
+      {%- if se_stts.image6 != blank -%}'{{text6}}',{%- endif -%}
+      {%- if se_stts.image7 != blank -%}'{{text7}}'{%- endif -%}
+    ];
+
+    document.querySelectorAll('.qpre-ug-link .qpre-link-image').forEach(function(image, index) {
+      image.addEventListener('mouseenter', function() {
+        document.querySelectorAll('.qpre-ug-link .qpre-link-image').forEach(function(img) {
+          img.classList.remove('active');
+        });
+        image.classList.add('active');
+        document.querySelector('.qpre-ug-link .qpre-desc').textContent = textArray[index];
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Press",
+  "tag": "section",
+  "class": "t4s-section t4s-section-all t4s-press",
+  "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "color",
+        "id": "line_color",
+        "label": "Line Color",
+        "default":"#1f1f1f"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Desktop Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "bg_color_md",
+        "label": "Mobile Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 300,
+        "step": 4,
+        "unit": "px",
+        "label": "Desktop Padding Top",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 300,
+        "step": 4,
+        "unit": "px",
+        "label": "Desktop Padding Bottom",
+        "default": 112
+      },
+      {
+        "type": "range",
+        "id": "padding_top_md",
+        "min": 0,
+        "max": 300,
+        "step": 4,
+        "unit": "px",
+        "label": "Mobile Padding Top",
+        "default": 52
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_md",
+        "min": 0,
+        "max": 300,
+        "step": 4,
+        "unit": "px",
+        "label": "Mobile Padding Bottom",
+        "default": 80
+      },
+      {
+        "type": "header",
+        "content": "Group 1"
+      },
+      {
+        "type": "image_picker",
+         "id": "image1",
+        "label": "Logo1",
+        "info":"368 x 154"
+       },
+       {
+         "type": "text",
+         "id": "title1",
+          "label": "Title 1"
+      },
+      {
+        "type": "header",
+        "content": "Group 2"
+      },
+      {
+        "type": "image_picker",
+         "id": "image2",
+        "label": "Logo2",
+        "info":"368 x 154"
+       },
+       {
+         "type": "text",
+         "id": "title2",
+          "label": "Title 2"
+       },
+      {
+        "type": "header",
+        "content": "Group 3"
+      },
+      {
+        "type": "image_picker",
+         "id": "image3",
+        "label": "Logo3",
+        "info":"368 x 154"
+       },
+       {
+         "type": "text",
+         "id": "title3",
+          "label": "Title 3"
+       },
+      {
+        "type": "header",
+        "content": "Group 4"
+      },
+      {
+        "type": "image_picker",
+         "id": "image4",
+        "label": "Logo4",
+        "info":"368 x 154"
+       },
+       {
+         "type": "text",
+         "id": "title4",
+          "label": "Title 4"
+       },
+      {
+        "type": "header",
+        "content": "Group 5"
+      },
+      {
+        "type": "image_picker",
+         "id": "image5",
+        "label": "Logo5",
+        "info":"368 x 154"
+       },
+       {
+         "type": "text",
+         "id": "title5",
+          "label": "Title 5"
+       },
+      {
+        "type": "header",
+        "content": "Group 6"
+      },
+      {
+        "type": "image_picker",
+         "id": "image6",
+        "label": "Logo6",
+        "info":"368 x 154"
+       },
+       {
+         "type": "text",
+         "id": "title6",
+          "label": "Title 6"
+       },
+      {
+        "type": "header",
+        "content": "Group 7"
+      },
+      {
+        "type": "image_picker",
+         "id": "image7",
+        "label": "Logo7",
+        "info":"368 x 154"
+       },
+       {
+         "type": "text",
+         "id": "title7",
+          "label": "Title 7"
+       }
+  ],
+  "presets": [
+    {
+      "name": "Press"
+    }
+  ]
+}
+{% endschema %}

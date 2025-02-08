@@ -1,0 +1,369 @@
+<style>
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background: {{ section.settings.bg_color }}
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: {{ section.settings.bg_color }}
+    }
+  }
+  .section-{{ section.id }} div:empty {
+    display: block;
+  }
+  .lsp4-title {
+    font-size: 28px;
+    padding-left: 10rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  .lsp4-swiper-slide {
+    position: relative;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .lsp4-slider-a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #333333;
+    text-decoration: none;
+  }
+  .lsp4-img {
+    width: 100%;
+    height: 800px;
+    object-fit: cover;
+  }
+  .lsp4-item-main {
+    position: absolute;
+    left: 50%;
+    top:100px;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 2;
+  }
+  .lsp4-item-title {
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: inherit;
+  }
+  .lsp4-item-title-2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: inherit;
+  }
+  .lsp4-item-title-3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: inherit;
+  }
+  .lsp4-next,.lsp4-prev {
+    width: 56px;
+    height: 56px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+  .lsp4-next:hover,.lsp4-prev:hover {
+    background: rgba(255,255,255,0.8);
+  }
+  .lsp4-next::after,.lsp4-prev::after {
+    color: #333;
+    font-size: 21px;
+    font-weight: bold;
+  }
+  .lsp4-btn-wrap {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .lsp4-btn-wrap > a {
+    border: solid #FFF 1px;
+    border-radius: 25px;
+    font-size: 16px;
+    padding: 6px 20px;
+    color: inherit;
+    text-decoration: none;
+    margin: 0px 5px;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+  }
+  .lsp4-btn-wrap > a:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  .lsp4-swiper .swiper-slide-visible .lsp4-item-main {
+    animation: mainMove .8s;
+  }
+  @keyframes mainMove {
+    0% {
+      top: 20px;
+      opacity: 0;
+    }
+    100% {
+      top: 100px;
+      opacity: 1;
+    }
+  }
+  .lsp4-swiper-wrap {
+    position: relative;
+  }
+  .lsp4-swiper1-wrap {
+    position: absolute;
+    z-index: 2;
+    left: 10%;
+    bottom: 50px;
+  }
+  .lsp4-swiper1 {
+    height: 100px;
+  }
+  .lsp4-swiper1-slide {
+    cursor: pointer;
+  }
+  .lsp4-swiper1 .swiper-slide {
+    opacity: 0.4;
+  }
+
+  .lsp4-swiper1 .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+  .pc-show {
+    display: block;
+  }
+  .mobile-show {
+    display: none;
+  }
+  @media screen and (max-width: 1024px) {
+    .pc-show {
+      display: none;
+    }
+    .mobile-show {
+      display: block;
+    }
+    .lsp4-img {
+      height: 400px;
+    }
+    .lsp4-next,.lsp4-prev {
+      width: 36px;
+      height: 36px;
+    }
+    .lsp4-next::after,.lsp4-prev::after {
+      font-size: 14px;
+    }
+    .lsp4-item-main {
+      width: 90%;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}">
+  <q-swiper-4-dj-slidershow>
+    <div class="lsp4-container">
+      {% if section.settings.title %}
+        <h2 class="lsp4-title">{{section.settings.title}}</h2>
+      {% endif %}
+      <div class="lsp4-swiper-wrap">
+        <div class="swiper lsp4-swiper">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              <div class="swiper-slide lsp4-swiper-slide">
+                <div class="lsp4-slider-a" href="{{ block.settings.url }}">
+                  {% assign img = block.settings.desktop_image %}
+                  {% assign mobile_image = block.settings.mobile_image %}
+                  {% if img != blank %}
+                    {{ 
+                      img
+                      | image_url: width:img.width
+                      | image_tag: 
+                        loading: 'lazy',
+                        alt: img.alt,
+                        sizes: "100vw", 
+                        widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                        class: 'lsp4-img pc-show'
+                    }}
+                  {% endif %}
+                  {% if mobile_image != blank %}
+                    {{ 
+                      mobile_image
+                      | image_url: width:mobile_image.width
+                      | image_tag: 
+                        loading: 'lazy',
+                        alt: mobile_image.alt,
+                        sizes: "100vw", 
+                        widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600',
+                        class: 'lsp4-img mobile-show'
+                    }}
+                  {% endif %}
+                  <div class="lsp4-item-main" style="color:{{ block.settings.text_color }}">
+                    {% if block.settings.title_1 != blank %}
+                      <h2 class="lsp4-item-title">{{block.settings.title_1}}</h2>
+                    {% endif %}
+                    {% if block.settings.title_2 != blank %}
+                      <h2 class="lsp4-item-title-2">{{block.settings.title_2}}</h2>
+                    {% endif %}
+                    {% if block.settings.title_3 != blank %}
+                      <h2 class="lsp4-item-title-3">{{block.settings.title_3}}</h2>
+                    {% endif %}
+                    <div class="lsp4-btn-wrap">
+                      {% if block.settings.url != blank %}
+                        <a href="{{ block.settings.url }}" style="border-color:{{ block.settings.text_color }}">
+                          {{ block.settings.btn_1_text }}
+                          <svg t="1732000833194" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2285" width="18" height="18"><path d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z" fill="{{ block.settings.text_color }}" p-id="2286"></path></svg>
+                        </a>
+                      {% endif %}
+                      {% if block.settings.url_2 != blank %}
+                        <a href="{{ block.settings.url_2 }}" style="border-color:{{ block.settings.text_color }}">
+                          {{ block.settings.btn_2_text }}
+                          <svg t="1732000833194" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2285" width="18" height="18"><path d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z" fill="{{ block.settings.text_color }}" p-id="2286"></path></svg>
+                        </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-button-next lsp4-next"></div>
+          <div class="swiper-button-prev lsp4-prev"></div>
+        </div>
+        <div class="lsp4-swiper1-wrap">
+          <div class="swiper lsp4-swiper1">
+            <div class="swiper-wrapper">
+              {% for block in section.blocks %}
+                <div class="swiper-slide lsp4-swiper1-slide" style="color:{{ block.settings.text_color }}">
+                  {{ block.settings.title_2 }}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </q-swiper-4-dj-slidershow>
+</section>
+
+{% schema %}
+{
+  "name": "Swiper-4-dj-slidershow",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Desktop Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_md",
+      "label": "Mobile Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+      {
+        "type": "slider",
+        "name": "Slider",
+        "settings": [
+          {
+            "type":"textarea",
+            "id": "title_1",
+            "label": "Title-1"
+          },
+          {
+            "type":"textarea",
+            "id": "title_2",
+            "label": "Title-2"
+          },
+          {
+            "type":"textarea",
+            "id": "title_3",
+            "label": "Title-3"
+          },
+          {
+            "type":"color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "image_picker",
+            "id": "desktop_image",
+            "label": "Desktop Image",
+            "info": "size:2560*800"
+          },
+          {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile Image",
+            "info": "size:375*400"
+          },
+          
+          
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Button 1 link"
+          },
+          {
+            "type":"text",
+            "id": "btn_1_text",
+            "label": "Button 1 text",
+            "default": "了解更多"
+          },
+          {
+            "type":"url",
+            "id": "url_2",
+            "label": "Button 2 link"
+          },
+          {
+            "type":"text",
+            "id": "btn_2_text",
+            "label": "Button 2 text",
+            "default": "立即购买"
+          }
+          
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Swiper-4-dj-slidershow"
+    }
+  ]
+}
+{% endschema %}
